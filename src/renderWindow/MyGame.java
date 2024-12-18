@@ -24,6 +24,7 @@ public class MyGame extends Game  {
     }
     
     public void update() {
+    	game.update();
     }
     
     public void draw(Graphics pen) {
@@ -38,7 +39,9 @@ public class MyGame extends Game  {
     	game.keyPressed(ke);
     }
 
-    public void keyReleased(KeyEvent ke) {}
+    public void keyReleased(KeyEvent ke) {
+    	game.keyReleased(ke);
+    }
 
     public void mouseClicked(MouseEvent ke) { 
     	

@@ -26,8 +26,19 @@ public class GameEnvironment {
 		height = h;
 		map = new Map(50);
 		keys = new KeyPressList(this);
-
+		KeyMap();
 	}
+	
+	public void KeyMap() {
+		keys.addKey(87, "W");
+	}
+	
+	public void actions(String phrase) {
+		if(phrase.equals("W")) {
+			System.out.println(true);
+		}
+	}
+	
 	
 	public void draw(Graphics pen) {
 		pen.setColor(Color.black);
@@ -37,14 +48,10 @@ public class GameEnvironment {
 	}
 	
 	public void update() {
-		
+		keys.update();
 	}
 	
-	public void actions(String phrase) {
-		if(phrase.equals("W")) {
-			System.out.println(true);
-		}
-	}
+	
 	
 	
 	public void keyTyped(KeyEvent ke) {}

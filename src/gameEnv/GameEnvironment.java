@@ -31,11 +31,23 @@ public class GameEnvironment {
 	
 	public void KeyMap() {
 		keys.addKey(87, "W");
+		keys.addKey(65, "A");
+		keys.addKey(83, "S");
+		keys.addKey(68, "D");
 	}
 	
 	public void actions(String phrase) {
 		if(phrase.equals("W")) {
-			System.out.println(true);
+			this.map.shiftTiles(0, 15);
+		} 
+		if(phrase.equals("A")) {
+			this.map.shiftTiles(15, 0);
+		}
+		if(phrase.equals("S")) {
+			this.map.shiftTiles(0, -15);
+		}
+		if(phrase.equals("D")) {
+			this.map.shiftTiles(-15, 0);
 		}
 	}
 	

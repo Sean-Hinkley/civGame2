@@ -1,6 +1,8 @@
 package gameEnv.map;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
 
 import renderWindow.RenderItem;
 
@@ -17,12 +19,14 @@ public class Map extends RenderItem{
 	public void setTiles() {
 		for(int x = 0; x < map.length; x++) {
 			for(int y = 0; y < map[x].length; y++) {
-				map[x][y] = new Tile(x,y);
+				map[x][y] = new Tile(x,y,1);
 			}
 		}
 	}
 	
 	public void drawBody(Graphics pen) {
+		//pen.setColor(Color.red);
+		//pen.fillRect(getPosX(), getPosY(), 128 *map.length, 128*map.length);
 		for(int x = 0; x < map.length; x++) {
 			for(int y = 0; y < map[x].length; y++) {
 				map[x][y].draw(pen);

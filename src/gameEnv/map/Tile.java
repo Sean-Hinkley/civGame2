@@ -25,7 +25,7 @@ public class Tile extends RenderItem{
 	private int size = 128;
 	private int scale = 1;
 	private TileBiome biome;
-	public Tile(int x, int y, int type) {
+	public Tile(int x, int y, int type, BufferedImage im) {
 		//x and y are measured in array placement
 		super("Tile",x,y);
 		biome = findtype(type);
@@ -33,21 +33,14 @@ public class Tile extends RenderItem{
 		this.setPosY(getPosY() * size);
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);
-		try {
-			BufferedImage img = ImageIO.read(new File("C:\\Users\\se.g.hinkley\\Downloads\\CivGame\\src\\gameEnv\\map\\Imgs\\Woods_Dense.png"));
-			BufferedImage scaledImage = new BufferedImage(128, 160, img.getType());
-			int w = img.getWidth();
-		    int h = img.getHeight();
-		    BufferedImage dimg = new BufferedImage(128, 160, img.getType());
-		    Graphics2D g = dimg.createGraphics();
-		    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-		            RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		    g.drawImage(img, 0, 0, 128, 160, 0, 0, w, h, null);
-		    g.dispose();
-		    image = dimg;
-		} catch(IOException e) {
-			
-		}
+		/*try {
+			image = ImageIO.read(new File("C:\\Users\\se.g.hinkley\\Downloads\\CivGame\\src\\gameEnv\\map\\Imgs\\Plains-Copy.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		image = im;
 		
 	}
 	
@@ -69,13 +62,15 @@ public class Tile extends RenderItem{
 	}
 	
 	public void drawBody(Graphics pen) {
-		
+		drawBody(pen,getPosX(),getPosY());
+	}
+	
+	public void drawBody(Graphics pen, int x, int y) {
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);
 		drawTile(pen);
 		pen.setColor(Color.black);
-		pen.drawRect(this.getPosX(),this.getPosY() , this.getObjW(), this.getObjH());
-		
+		pen.drawRect(x, y, this.getObjW(), this.getObjH());
 	}
 	
 	public void drawTile(Graphics pen) {

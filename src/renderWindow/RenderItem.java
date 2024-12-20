@@ -49,10 +49,16 @@ public class RenderItem {
 		drawBody(pen);
 	}
 	
-	public void drawBody(Graphics pen) {
+	public void drawBody(Graphics pen, int x, int y) {
 		pen.setColor(Color.white);
-		pen.fillRect(PosX, PosY, ObjW, ObjH);
+		pen.fillRect(x, y, ObjW, ObjH);
 	}
+	
+	public void drawBody(Graphics pen) {
+		drawBody(pen,PosX,PosY);
+	}
+	
+	
 	
 	
 	public int getPosX() {
@@ -121,6 +127,7 @@ public class RenderItem {
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 	/*
 	public class PointMoved {

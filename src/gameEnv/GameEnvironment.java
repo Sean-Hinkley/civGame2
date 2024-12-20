@@ -9,10 +9,10 @@ import gameEnv.map.Map;
 import gameEnv.map.Tile;
 
 public class GameEnvironment {
-	private double gold;
-	private double science;
-	private double culture;
-	private double faith;
+	//private double gold;
+	//private double science;
+	//private double culture;
+	//private double faith;
 	
 	private int width;
 	private int height;
@@ -20,11 +20,13 @@ public class GameEnvironment {
 	private int mapSize = 25;
 	
 	private KeyPressList keys;
+	Camera cam;
 	Map map;
 	public GameEnvironment(int w, int h) {
 		width = w;
 		height = h;
 		map = new Map(50);
+		cam = new Camera(100,100,12,map);
 		keys = new KeyPressList(this);
 		KeyMap();
 	}
@@ -38,16 +40,16 @@ public class GameEnvironment {
 	
 	public void actions(String phrase) {
 		if(phrase.equals("W")) {
-			this.map.shiftTiles(0, 15);
+			cam.setPosY(cam.getPosY()-15);
 		} 
 		if(phrase.equals("A")) {
-			this.map.shiftTiles(15, 0);
+			cam.setPosX(cam.getPosX()-15);
 		}
 		if(phrase.equals("S")) {
-			this.map.shiftTiles(0, -15);
+			cam.setPosY(cam.getPosY()+15);
 		}
 		if(phrase.equals("D")) {
-			this.map.shiftTiles(-15, 0);
+			cam.setPosX(cam.getPosX()+15);
 		}
 	}
 	
@@ -55,7 +57,8 @@ public class GameEnvironment {
 	public void draw(Graphics pen) {
 		pen.setColor(Color.black);
 		pen.fillRect(0, 0, width, height);
-		map.draw(pen);
+		//map.draw(pen);
+		cam.draw(pen);
 		
 	}
 	

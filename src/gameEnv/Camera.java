@@ -14,7 +14,7 @@ public class Camera extends RenderItem {
 	private Map map;
 	
 	public Camera(int w, int h, int size, Map m) {
-		super("Camera",100,100,30,30);
+		super("Camera",350,250);
 		ScreenWidth = w;
 		ScreenHeight = h;
 		tilesize = size;
@@ -40,13 +40,12 @@ public class Camera extends RenderItem {
 	public Tile[][] getView() {
 		int tmpW = (int) (ScreenWidth / (tilesize * Scale));
 		int tmpH = (int) (ScreenHeight / (tilesize * Scale));
-		
+
 		int tmpX = (int) (getPosX() / (tilesize * Scale));
 		int tmpY = (int) (getPosY() / (tilesize * Scale));
-		
 		int strtX = (int) (tmpX - (tmpW / 2));
 		int strtY = (int) (tmpY - (tmpH / 2));
-		
+
 		Tile mp[][] = new Tile[tmpW][tmpH];
 		
 		mp = map.getSection(strtX, strtY, tmpW, tmpH);

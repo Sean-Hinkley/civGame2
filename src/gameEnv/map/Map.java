@@ -1,8 +1,8 @@
 package gameEnv.map;
 
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Graphics;
-import java.io.IOException;
+//import java.io.IOException;
 
 import gameEnv.ImgHandler;
 import renderWindow.RenderItem;
@@ -47,15 +47,11 @@ public class Map extends RenderItem{
 	
 	public Tile[][] getSection(int x, int y, int w, int h) {
 		Tile[][] mp = new Tile[w][h];
-		for(int dx = x; dx < dx + w; dx++) {
-			for(int dy = y; dy < y + h; dy++) {
-				int ddx = dx-x;
-				int ddy = dy-y;
-				if(!(ddx > 0 && ddx < map.length) && (ddy > 0 && ddy < map[0].length)) {
-					System.out.println(true);
-					mp[ddx][ddy] = map[dx][dy];
+		for(int sx = 0; sx < w; sx++) {
+			for(int sy = 0; sy < h; sy++) {
+				if((sx+x < map.length && sy+y < map.length) && (sy+y > 0 && sx+x > 0)) {
+					mp[sx][sy] = map[sx+x][sy+y];
 				}
-				
 			}
 		}
 		return mp;

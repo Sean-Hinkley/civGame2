@@ -15,7 +15,7 @@ public class ImgHandler {
 		
 		title = "Test";
 		imgList = new ArrayList<Img>();
-		Img tst = new Img("C:\\Users\\se.g.hinkley\\Downloads\\CivGame\\src\\gameEnv\\map\\Imgs\\Plains-Copy.png", "Plains");
+		Img tst = new Img("C:\\Users\\se.g.hinkley\\Desktop\\civGame2\\civGame2\\src\\gameEnv\\map\\Imgs\\Plains-Copy.png", "Plains");
 		imgList.add(tst);
 		System.out.println(imgList.get(0));
 	}
@@ -76,6 +76,5 @@ public class ImgHandler {
 	
 	
 	public static void main(String[] args) {
-		ImgHandler test = new ImgHandler();
 	}
 }

@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import gameEnv.map.Map;
-import gameEnv.map.Tile;
+//import gameEnv.map.Tile;
 
 public class GameEnvironment {
 	//private double gold;
@@ -25,8 +25,8 @@ public class GameEnvironment {
 	public GameEnvironment(int w, int h) {
 		width = w;
 		height = h;
-		map = new Map(50);
-		cam = new Camera(100,100,12,map);
+		map = new Map(mapSize);
+		cam = new Camera(w,h,12,map);
 		keys = new KeyPressList(this);
 		KeyMap();
 	}

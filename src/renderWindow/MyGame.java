@@ -1,12 +1,12 @@
 package renderWindow;
 
-import java.awt.Color;
-import java.awt.Font;
+//import java.awt.Color;
+//import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.util.ArrayList;
+//import java.io.IOException;
+//import java.util.ArrayList;
 
 import gameEnv.GameEnvironment;
 
@@ -19,7 +19,7 @@ public class MyGame extends Game  {
     
     GameEnvironment game;
     public MyGame() {
-    	game = new GameEnvironment(this.SCREEN_WIDTH,this.SCREEN_HEIGHT);
+    	game = new GameEnvironment(SCREEN_WIDTH,SCREEN_HEIGHT);
     	
     }
     

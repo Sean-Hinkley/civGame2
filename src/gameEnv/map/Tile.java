@@ -2,25 +2,25 @@ package gameEnv.map;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
+//import java.awt.Graphics2D;
+//import java.awt.RenderingHints;
+//import java.awt.geom.AffineTransform;
+//import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+//import java.io.File;
+//import java.io.IOException;
 
-import javax.imageio.ImageIO;
+//import javax.imageio.ImageIO;
 
 import renderWindow.RenderItem;
 
 public class Tile extends RenderItem{
-	private double production;
-	private double food;
-	private double science;
-	private double faith;
-	private double gold;
-	private double culture;
+	//private double production;
+	//private double food;
+	//private double science;
+	//private double faith;
+	//private double gold;
+	//private double culture;
 	private BufferedImage image;
 	private int size = 128;
 	private int scale = 1;

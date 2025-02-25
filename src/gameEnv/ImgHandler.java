@@ -15,7 +15,7 @@ public class ImgHandler {
 		
 		title = "Test";
 		imgList = new ArrayList<Img>();
-		Img tst = new Img("C:\\Users\\se.g.hinkley\\Desktop\\civGame2\\civGame2\\src\\gameEnv\\map\\Imgs\\Plains-Copy.png", "Plains");
+		Img tst = new Img("src\\gameEnv\\map\\Imgs\\Plains.png", "Plains");
 		imgList.add(tst);
 		System.out.println(imgList.get(0));
 	}

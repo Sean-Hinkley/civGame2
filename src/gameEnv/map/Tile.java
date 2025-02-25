@@ -70,7 +70,7 @@ public class Tile extends RenderItem{
 		this.setObjH(size * scale);
 		drawTile(pen);
 		pen.setColor(Color.black);
-		pen.drawRect(x, y, this.getObjW(), this.getObjH());
+		pen.drawRect(this.getObjW() * x, this.getObjH()* y, this.getObjW(), this.getObjH());
 	}
 	
 	public void drawTile(Graphics pen) {
@@ -84,7 +84,7 @@ public class Tile extends RenderItem{
 			pen.setColor(new Color(0,0,200));
 		}
 		pen.drawImage(image,this.getPosX(),this.getPosY()-32,null);
-		//pen.fillRect(this.getPosX(),this.getPosY() , this.getObjW(), this.getObjH());
+		
 	}
 	
 

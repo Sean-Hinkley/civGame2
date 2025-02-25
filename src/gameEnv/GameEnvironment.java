@@ -26,7 +26,7 @@ public class GameEnvironment {
 		width = w;
 		height = h;
 		map = new Map(mapSize);
-		cam = new Camera(w,h,12,map);
+		cam = new Camera(w,h,128,map);
 		keys = new KeyPressList(this);
 		KeyMap();
 	}
@@ -40,16 +40,16 @@ public class GameEnvironment {
 	
 	public void actions(String phrase) {
 		if(phrase.equals("W")) {
-			cam.setPosY(cam.getPosY()-15);
+			cam.setPosY(cam.getPosY()+15);
 		} 
 		if(phrase.equals("A")) {
-			cam.setPosX(cam.getPosX()-15);
+			cam.setPosX(cam.getPosX()+15);
 		}
 		if(phrase.equals("S")) {
-			cam.setPosY(cam.getPosY()+15);
+			cam.setPosY(cam.getPosY()-15);
 		}
 		if(phrase.equals("D")) {
-			cam.setPosX(cam.getPosX()+15);
+			cam.setPosX(cam.getPosX()-15);
 		}
 	}
 	

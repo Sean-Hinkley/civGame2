@@ -15,8 +15,8 @@ public class Camera extends RenderItem {
 	
 	public Camera(int w, int h, int size, Map m) {
 		super("Camera",350,250);
-		ScreenWidth = w;
-		ScreenHeight = h;
+		ScreenWidth = w + 100;
+		ScreenHeight = h + 100;
 		tilesize = size;
 		Scale = 1;
 		map = m;
@@ -43,6 +43,7 @@ public class Camera extends RenderItem {
 
 		int tmpX = (int) (getPosX() / (tilesize * Scale));
 		int tmpY = (int) (getPosY() / (tilesize * Scale));
+		System.out.println("X: " + tmpX + "  Y: " + tmpY);
 		int strtX = (int) (tmpX - (tmpW / 2));
 		int strtY = (int) (tmpY - (tmpH / 2));
 

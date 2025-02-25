@@ -1,5 +1,6 @@
 package gameEnv.map;
 
+import java.awt.Color;
 //import java.awt.Color;
 import java.awt.Graphics;
 //import java.io.IOException;
@@ -47,6 +48,7 @@ public class Map extends RenderItem{
 	
 	public Tile[][] getSection(int x, int y, int w, int h) {
 		Tile[][] mp = new Tile[w][h];
+		//System.out.println("W: " + w + "  H: " + h);
 		for(int sx = 0; sx < w; sx++) {
 			for(int sy = 0; sy < h; sy++) {
 				if((sx+x < map.length && sy+y < map.length) && (sy+y > 0 && sx+x > 0)) {

@@ -12,33 +12,30 @@ public class ImgHandler {
 	public String title;
 	
 	public ImgHandler() {
-		
 		title = "Test";
 		imgList = new ArrayList<Img>();
-		Img tst = new Img("src\\gameEnv\\map\\Imgs\\Plains.png", "Plains");
-		imgList.add(tst);
-		System.out.println(imgList.get(0));
 	}
 	
 	public BufferedImage getImg(int ind) {
-		if(imgList.get(ind)!=null) {
-			return imgList.get(ind).getImg();
+			
+		if(imgList.size()>0) {
+			if(imgList.get(ind)!=null) {
+				return imgList.get(ind).getImg();
+			}
+			return null;
 		}
-		
+
 		return null;
+			
 	}
 	
 	
 	public class Img {
-		
 		private BufferedImage img;
 		public String title;
-		
-		
 		public Img(BufferedImage im, String tit) {
 			
 		}
-		
 		public Img(String im, String tit) {
 			title = tit;
 			try {
@@ -48,7 +45,6 @@ public class ImgHandler {
 				e.printStackTrace();
 			}
 		}
-		
 		public void resize(int h, int w) {
 			/*int w = img.getWidth();
 		    int h = img.getHeight();
@@ -60,18 +56,13 @@ public class ImgHandler {
 		    g.dispose();
 		    image = dimg;*/
 		}
-		
 		public BufferedImage getImg() {
 			return img;
 		}
-		
 		public String toString() {
 			String tmp = title;
 			return tmp;
 		}
-		
-		
-		
 	}
 	
 	

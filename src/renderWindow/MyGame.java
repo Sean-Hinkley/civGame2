@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 //import java.io.IOException;
 //import java.util.ArrayList;
 
+import gameEnv.Client;
 import gameEnv.GameEnvironment;
 
 
@@ -17,9 +18,9 @@ public class MyGame extends Game  {
     public static final int SCREEN_WIDTH = 1700;
     public static final int SCREEN_HEIGHT = 900;
     
-    GameEnvironment game;
+    Client game;
     public MyGame() {
-    	game = new GameEnvironment(SCREEN_WIDTH,SCREEN_HEIGHT);
+    	game = new Client(SCREEN_WIDTH,SCREEN_HEIGHT);
     	
     }
     
@@ -44,7 +45,7 @@ public class MyGame extends Game  {
     }
 
     public void mouseClicked(MouseEvent ke) { 
-    	
+    	game.mouseClicked(ke);
     	
     }
 

@@ -6,28 +6,28 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import gameEnv.map.Map;
+import gameEnv.map.Tile;
 //import gameEnv.map.Tile;
+import gameEnv.units.Unit;
 
-public class GameEnvironment {
+public class GameEnvironment extends Environment{
 	//private double gold;
 	//private double science;
 	//private double culture;
 	//private double faith;
+	private Unit selectedUnit;
 	
-	private int width;
-	private int height;
-	
-	private int mapSize = 25;
+	private int mapSize = 100;
 	
 	private KeyPressList keys;
 	Camera cam;
 	Map map;
 	public GameEnvironment(int w, int h) {
-		width = w;
-		height = h;
+		super(w,h);
 		map = new Map(mapSize);
 		cam = new Camera(w,h,128,map);
 		keys = new KeyPressList(this);
+		selectedUnit = null;
 		KeyMap();
 	}
 	
@@ -40,23 +40,23 @@ public class GameEnvironment {
 	
 	public void actions(String phrase) {
 		if(phrase.equals("W")) {
-			cam.setPosY(cam.getPosY()+15);
+			cam.setPosY(cam.getPosY()-5);
 		} 
 		if(phrase.equals("A")) {
-			cam.setPosX(cam.getPosX()+15);
+			cam.setPosX(cam.getPosX()-5);
 		}
 		if(phrase.equals("S")) {
-			cam.setPosY(cam.getPosY()-15);
+			cam.setPosY(cam.getPosY()+5);
 		}
 		if(phrase.equals("D")) {
-			cam.setPosX(cam.getPosX()-15);
+			cam.setPosX(cam.getPosX()+5);
 		}
 	}
 	
 	
 	public void draw(Graphics pen) {
 		pen.setColor(Color.black);
-		pen.fillRect(0, 0, width, height);
+		pen.fillRect(0, 0, getWidth(), getHeight());
 		//map.draw(pen);
 		cam.draw(pen);
 		
@@ -78,9 +78,48 @@ public class GameEnvironment {
     public void keyReleased(KeyEvent ke) {
     	this.keys.keyReleased(ke);
     }
+	public void leftClick(MouseEvent ke) {
+		int x = (ke.getX() - 8)/128;
+		int y = (ke.getY() - 32)/128;
+		if((x < map.size() && x > 0) && (y < map.size() && y > 0)) {
+			Unit m = map.getTile(x, y).getUnit();
+			if(m != null) {
+				selectedUnit = m;
+				m.setSelect(true);
+			}
+			else {
+				if(selectedUnit != null) {
+					selectedUnit.setSelect(false);
+					selectedUnit = null;
+				}
+			}
+		}
+	}
 
+	public void rightClick(MouseEvent ke) {
+		int x = (ke.getX() - 8)/128;
+		int y = (ke.getY() - 32)/128;
+		System.out.println("X: " + x);
+		System.out.println("Y: " + y);
+		if(selectedUnit!= null) {
+			int tx = selectedUnit.getTileX();
+			int ty = selectedUnit.getTileY();
+			System.out.println("TX: " + tx);
+			System.out.println("TY: " + ty);
+			selectedUnit.moved(x, y);
+			map.getTile(tx, ty).addUnit(null);
+			map.getTile(x, y).addUnit(selectedUnit);
+
+		}
+	}
     public void mouseClicked(MouseEvent ke) { 
-    	
+    	if(ke.getButton() == 1) {
+			leftClick(ke);
+		}
+		if(ke.getButton() == 3) {
+			rightClick(ke);
+		}
+
     	
     }
 

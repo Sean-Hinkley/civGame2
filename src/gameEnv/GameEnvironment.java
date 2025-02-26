@@ -19,16 +19,20 @@ public class GameEnvironment extends Environment{
 	
 	private int mapSize = 100;
 	
-	private KeyPressList keys;
+	//private KeyPressList keys;
 	Camera cam;
 	Map map;
 	public GameEnvironment(int w, int h) {
 		super(w,h);
 		map = new Map(mapSize);
 		cam = new Camera(w,h,128,map);
-		keys = new KeyPressList(this);
+		//keys = new KeyPressList(this);
 		selectedUnit = null;
 		KeyMap();
+	}
+
+	public Map getMap() {
+		return map;
 	}
 	
 	public void KeyMap() {
@@ -40,17 +44,26 @@ public class GameEnvironment extends Environment{
 	
 	public void actions(String phrase) {
 		if(phrase.equals("W")) {
+			System.out.println("W");
 			cam.setPosY(cam.getPosY()-5);
 		} 
 		if(phrase.equals("A")) {
+			System.out.println("A");
 			cam.setPosX(cam.getPosX()-5);
 		}
 		if(phrase.equals("S")) {
+			System.out.println("S");
 			cam.setPosY(cam.getPosY()+5);
 		}
 		if(phrase.equals("D")) {
+			System.out.println("D");
 			cam.setPosX(cam.getPosX()+5);
 		}
+	}
+
+	public void update() {
+		keys.update(this);
+
 	}
 	
 	
@@ -62,22 +75,13 @@ public class GameEnvironment extends Environment{
 		
 	}
 	
-	public void update() {
-		keys.update();
-	}
 	
 	
 	
 	
 	public void keyTyped(KeyEvent ke) {}
 
-    public void keyPressed(KeyEvent ke) {
-    	this.keys.keyPressed(ke);
-    }
-
-    public void keyReleased(KeyEvent ke) {
-    	this.keys.keyReleased(ke);
-    }
+    
 	public void leftClick(MouseEvent ke) {
 		int x = (ke.getX() - 8)/128;
 		int y = (ke.getY() - 32)/128;

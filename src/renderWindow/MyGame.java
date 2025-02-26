@@ -25,6 +25,7 @@ public class MyGame extends Game  {
     }
     
     public void update() {
+        
     	game.update();
     }
     

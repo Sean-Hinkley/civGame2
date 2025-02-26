@@ -7,10 +7,11 @@ import java.awt.event.MouseEvent;
 public class Environment {
     private int width;
     private int height;
-
+    KeyPressList keys;
 	public Environment(int w, int h) {
 		width = w;
 		height = h;
+        keys = new KeyPressList(this);
 	}
 	
 	public void KeyMap() {
@@ -24,11 +25,10 @@ public class Environment {
 	
 	public void draw(Graphics pen) {
 
-		
 	}
 	
 	public void update() {
-
+        keys.update(this);
 	}
 
     public int getWidth() {
@@ -43,11 +43,17 @@ public class Environment {
 	public void keyTyped(KeyEvent ke) {}
 
     public void keyPressed(KeyEvent ke) {
-
+        //System.out.println("HeLLo");
+    	this.keys.keyPressed(ke);
     }
 
     public void keyReleased(KeyEvent ke) {
-        
+    	this.keys.keyReleased(ke);
+    }
+
+    public void setKeyPressList(KeyPressList kpl) {
+        keys = kpl;
+        KeyMap();
     }
 	public void leftClick(MouseEvent ke) {
 

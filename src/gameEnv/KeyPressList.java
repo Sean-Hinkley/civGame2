@@ -5,13 +5,14 @@ import java.util.ArrayList;
 
 public class KeyPressList {
 	public ArrayList<Key> keys;
-	private GameEnvironment game;
-	public KeyPressList(GameEnvironment g) {
+	private Environment game;
+	public KeyPressList(Environment g) {
 		keys = new ArrayList<Key>();
 		game = g;
 	}
 	
 	public void addKey(int code, String phrs) {
+		System.out.println("Worked");
 		keys.add(new Key(code,phrs));
 	}
 	
@@ -29,12 +30,12 @@ public class KeyPressList {
 		}
 	}
 	
-	public void update() {
-		//System.out.println("True");
+	public void update(Environment env) {
+		System.out.println("True" + env);
 		for(int k = 0; k < keys.size(); k++) {
 			String n = keys.get(k).getAccess();
 			if(n != null) {
-				game.actions(n);
+			 env.actions(n);
 			}
 		}
 	}

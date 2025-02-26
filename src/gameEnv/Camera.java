@@ -1,18 +1,14 @@
 package gameEnv;
-
 import java.awt.Graphics;
-
 import gameEnv.map.Map;
 import gameEnv.map.Tile;
 import renderWindow.RenderItem;
-
 public class Camera extends RenderItem {
 	private int ScreenWidth;
 	private int ScreenHeight;
 	private int tilesize;
 	private int Scale;
 	private Map map;
-	
 	public Camera(int w, int h, int size, Map m) {
 		super("Camera",0,0,w+300,h+150);
 		ScreenWidth = w;
@@ -20,13 +16,9 @@ public class Camera extends RenderItem {
 		tilesize = size;
 		Scale = 1;
 		map = m;
-	}
-	
-	
-	
+	}	
 	public void drawBody(Graphics pen) {
-		map.drawColliding(pen, getPosX(), getPosY(), getObjW(),getObjH());
-		
+		map.drawColliding(pen, getPosX(), getPosY(), getObjW(),getObjH());		
 		// Tile[][] mp = getView();
 		// //System.out.println(mp[0][0]);
 		// int tmpscl = Scale * tilesize;
@@ -43,8 +35,7 @@ public class Camera extends RenderItem {
 				
 		// 	}
 		// }
-	}
-	
+	}	
 	public Tile[][] getView() {
 		int tmpscl = Scale * tilesize;
 		int tmpW = ScreenWidth/tmpscl +2;
@@ -52,10 +43,8 @@ public class Camera extends RenderItem {
 		int tmpH = ScreenHeight/tmpscl +2;
 		System.out.println("TMP H: " + tmpH);
 		Tile[][] mp = new Tile[tmpW][tmpH];
-		
 		int tmpX = this.getPosX()/tmpscl;
 		int tmpY = this.getPosY()/tmpscl;
-
 		map.getSection(tmpX-1, tmpY-1, mp);
 		//System.out.println(mp[0][0]);
 		return mp;

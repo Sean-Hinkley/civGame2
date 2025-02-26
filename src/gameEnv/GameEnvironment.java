@@ -6,42 +6,29 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import gameEnv.map.Map;
-import gameEnv.map.Tile;
-//import gameEnv.map.Tile;
 import gameEnv.units.Unit;
 
 public class GameEnvironment extends Environment{
-	//private double gold;
-	//private double science;
-	//private double culture;
-	//private double faith;
 	private Unit selectedUnit;
-	
 	private int mapSize = 100;
-	
-	//private KeyPressList keys;
 	Camera cam;
 	Map map;
 	public GameEnvironment(int w, int h) {
 		super(w,h);
 		map = new Map(mapSize);
 		cam = new Camera(w,h,128,map);
-		//keys = new KeyPressList(this);
 		selectedUnit = null;
 		KeyMap();
 	}
-
 	public Map getMap() {
 		return map;
 	}
-	
 	public void KeyMap() {
 		keys.addKey(87, "W");
 		keys.addKey(65, "A");
 		keys.addKey(83, "S");
 		keys.addKey(68, "D");
 	}
-	
 	public void actions(String phrase) {
 		if(phrase.equals("W")) {
 			System.out.println("W");
@@ -60,13 +47,9 @@ public class GameEnvironment extends Environment{
 			cam.setPosX(cam.getPosX()+5);
 		}
 	}
-
 	public void update() {
 		keys.update(this);
-
 	}
-	
-	
 	public void draw(Graphics pen) {
 		pen.setColor(Color.black);
 		pen.fillRect(0, 0, getWidth(), getHeight());
@@ -74,14 +57,7 @@ public class GameEnvironment extends Environment{
 		cam.draw(pen);
 		
 	}
-	
-	
-	
-	
-	
 	public void keyTyped(KeyEvent ke) {}
-
-    
 	public void leftClick(MouseEvent ke) {
 		int x = (ke.getX() - 8)/128;
 		int y = (ke.getY() - 32)/128;
@@ -99,7 +75,6 @@ public class GameEnvironment extends Environment{
 			}
 		}
 	}
-
 	public void rightClick(MouseEvent ke) {
 		int x = (ke.getX() - 8)/128;
 		int y = (ke.getY() - 32)/128;
@@ -110,10 +85,12 @@ public class GameEnvironment extends Environment{
 			int ty = selectedUnit.getTileY();
 			System.out.println("TX: " + tx);
 			System.out.println("TY: " + ty);
-			selectedUnit.moved(x, y);
-			map.getTile(tx, ty).addUnit(null);
-			map.getTile(x, y).addUnit(selectedUnit);
+			boolean b = selectedUnit.moved(x, y);
+			if(b) {
+				map.getTile(tx, ty).addUnit(null);
+				map.getTile(x, y).addUnit(selectedUnit);
 
+			}	
 		}
 	}
     public void mouseClicked(MouseEvent ke) { 
@@ -122,30 +99,15 @@ public class GameEnvironment extends Environment{
 		}
 		if(ke.getButton() == 3) {
 			rightClick(ke);
-		}
-
-    	
+		}	
     }
-
-    public void mousePressed(MouseEvent me) {
-    	
-    	
-    }
-    
     public void mouseReleased(MouseEvent me) {}
-
     public void mouseEntered(MouseEvent me) {}
-
     public void mouseExited(MouseEvent me) {}
-       
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
+		// TODO Auto-generated method stub		
+	}	
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 }

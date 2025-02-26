@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 //import java.util.ArrayList;
 
 import gameEnv.Client;
-import gameEnv.GameEnvironment;
 
 
 
@@ -23,18 +22,13 @@ public class MyGame extends Game  {
     	game = new Client(SCREEN_WIDTH,SCREEN_HEIGHT);
     	
     }
-    
     public void update() {
         
     	game.update();
     }
-    
     public void draw(Graphics pen) {
     	game.draw(pen);
     }
-    
-    
-        
     public void keyTyped(KeyEvent ke) {}
 
     public void keyPressed(KeyEvent ke) {
@@ -44,39 +38,20 @@ public class MyGame extends Game  {
     public void keyReleased(KeyEvent ke) {
     	game.keyReleased(ke);
     }
-
     public void mouseClicked(MouseEvent ke) { 
     	game.mouseClicked(ke);
     	
     }
-
-    public void mousePressed(MouseEvent me) {
-    	
-    	
-    }
-    
+    public void mousePressed(MouseEvent me) {}
     public void mouseReleased(MouseEvent me) {}
-
     public void mouseEntered(MouseEvent me) {}
-
     public void mouseExited(MouseEvent me) {}
-       
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-	}
-
-	
+    }
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
-        
     //Launches the Game
-    public static void main(String[] args) { new MyGame().start(TITLE, SCREEN_WIDTH,SCREEN_HEIGHT); }
-
-	
-    
-    
-    
-    
+    public static void main(String[] args) { new MyGame().start(TITLE, SCREEN_WIDTH,SCREEN_HEIGHT); }    
 }

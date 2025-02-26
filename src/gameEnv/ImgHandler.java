@@ -1,41 +1,29 @@
 package gameEnv;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
-
 public class ImgHandler {
 	private ArrayList<Img> imgList;
 	public String title;
-	
 	public ImgHandler() {
 		title = "Test";
 		imgList = new ArrayList<Img>();
 	}
-	
-	public BufferedImage getImg(int ind) {
-			
+	public BufferedImage getImg(int ind) {	
 		if(imgList.size()>0) {
 			if(imgList.get(ind)!=null) {
 				return imgList.get(ind).getImg();
 			}
 			return null;
 		}
-
 		return null;
-			
 	}
-	
-	
 	public class Img {
 		private BufferedImage img;
 		public String title;
-		public Img(BufferedImage im, String tit) {
-			
-		}
+		public Img(BufferedImage im, String tit) {}
 		public Img(String im, String tit) {
 			title = tit;
 			try {
@@ -63,9 +51,5 @@ public class ImgHandler {
 			String tmp = title;
 			return tmp;
 		}
-	}
-	
-	
-	public static void main(String[] args) {
 	}
 }

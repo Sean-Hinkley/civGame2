@@ -2,13 +2,11 @@ package gameEnv;
 
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-
-import org.w3c.dom.events.MouseEvent;
+import java.awt.event.MouseEvent;
 
 public class Client extends Environment{
     Environment[] allEnvironments;
     Environment loading;
-
     Camera cam;
     public Client(int w, int h) {
         super(w,h);
@@ -17,38 +15,19 @@ public class Client extends Environment{
         loading = allEnvironments[0];
         loading.setKeyPressList(keys);
     }
-
-	
-	
 	public void draw(Graphics pen) {
-        if(loading!=null) loading.draw(pen);
-		
+        if(loading!=null) loading.draw(pen);	
 	}
-	
 	public void update() {
-        keys.update(this);
-        
+        keys.update(this);   
         if(loading!=null) loading.update();
 	}
-	
-	
-	
 	public void keyTyped(KeyEvent ke) {}
-
-	public void leftClick(MouseEvent ke) {
-
-	}
-
-	public void rightClick(MouseEvent ke) {
-
-	}
+	public void leftClick(MouseEvent ke) {}
+	public void rightClick(MouseEvent ke) {}
     public void mouseClicked(MouseEvent ke) { 
-
+        loading.mouseClicked(ke);
     }
-
-    public void mousePressed(MouseEvent me) {
-    	
-    	
-    }
+    public void mousePressed(MouseEvent me) {}
 
 }

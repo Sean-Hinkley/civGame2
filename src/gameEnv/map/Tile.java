@@ -2,27 +2,11 @@ package gameEnv.map;
 
 import java.awt.Color;
 import java.awt.Graphics;
-//import java.awt.Graphics2D;
-//import java.awt.RenderingHints;
-//import java.awt.geom.AffineTransform;
-//import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-//import java.io.File;
-//import java.io.IOException;
-
 import gameEnv.units.Unit;
-
-//import javax.imageio.ImageIO;
-
 import renderWindow.RenderItem;
 
 public class Tile extends RenderItem{
-	//private double production;
-	//private double food;
-	//private double science;
-	//private double faith;
-	//private double gold;
-	//private double culture;
 	private Unit onTile;
 	private BufferedImage image;
 	private int size = 128;
@@ -30,46 +14,27 @@ public class Tile extends RenderItem{
 	private TileBiome biome;
 	public Tile(int x, int y, int type, BufferedImage im) {
 		//x and y are measured in array placement
-		
 		super("Tile",x,y);
 		onTile = null;
 		biome = findtype(type);
 		this.setPosX(getPosX() * size);
 		this.setPosY(getPosY() * size);
 		this.setObjW(size * scale);
-		this.setObjH(size * scale);
-		/*try {
-			image = ImageIO.read(new File("C:\\Users\\se.g.hinkley\\Downloads\\CivGame\\src\\gameEnv\\map\\Imgs\\Plains-Copy.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
+		this.setObjH(size * scale);	
 		image = im;
-		
 	}
 
 	public Tile(int x, int y, TileBiome type, BufferedImage im) {
 		//x and y are measured in array placement
-		
 		super("Tile",x,y);
 		onTile = null;
 		biome = type;
 		this.setPosX(getPosX() * size);
 		this.setPosY(getPosY() * size);
 		this.setObjW(size * scale);
-		this.setObjH(size * scale);
-		/*try {
-			image = ImageIO.read(new File("C:\\Users\\se.g.hinkley\\Downloads\\CivGame\\src\\gameEnv\\map\\Imgs\\Plains-Copy.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		image = im;
-		
+		this.setObjH(size * scale);		
+		image = im;	
 	}
-
 	public Unit getUnit() {
 		return onTile;
 	}
@@ -80,9 +45,6 @@ public class Tile extends RenderItem{
 			onTile = null;
 		}
 	}
-
-	
-	
 	public TileBiome findtype(int t) {
 		TileBiome tmp = null;
 		switch(t) {
@@ -99,15 +61,11 @@ public class Tile extends RenderItem{
 			tmp = TileBiome.sand;
 			break;
 		} 
-
-		
 		return tmp;
 	}
-	
 	public void drawBody(Graphics pen) {
 		drawBody(pen,getPosX(),getPosY());
 	}
-	
 	public void drawBody(Graphics pen, int x, int y) {
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);
@@ -118,7 +76,6 @@ public class Tile extends RenderItem{
 			onTile.draw(pen, x, y);
 		}
 	}
-	
 	public void drawTile(Graphics pen, int x, int y) {
 		if(biome == TileBiome.plains) {
 			pen.setColor(Color.green);
@@ -134,9 +91,7 @@ public class Tile extends RenderItem{
 		}
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);
-		pen.fillRect(x, y, getObjW(), getObjH());
-		//pen.drawImage(image,this.getPosX(),this.getPosY()-32,null);
-		
+		pen.fillRect(x, y, getObjW(), getObjH());	
 	}
 	
 

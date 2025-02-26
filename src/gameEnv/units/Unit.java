@@ -9,18 +9,28 @@ public class Unit extends RenderItem{
     private boolean selected;
     private int x;
     private int y;
-    public Unit(int x, int y) {
+    private int moves;
+    public Unit(int x, int y, int moves) {
         super("Unit", x*128, y*128);
         this.x = x;
+        this.moves = moves;
         this.y = y;
         selected = false;
     }
 
-    public void moved(int x, int y) {
-        setPosX(x*128);
-        setPosY(y*128);
-        this.x = x;
-        this.y = y;
+    public boolean moved(int x, int y) {
+        int tx = Math.abs(this.x-x);
+        int ty = Math.abs(this.y-y);
+        int sum = tx+ty;
+        if(sum<=moves) {
+            setPosX(x*128);
+            setPosY(y*128);
+            this.x = x;
+            this.y = y;
+            return true;
+        }
+        return false;
+        
     }
     public int getTileX() {
         return x;
@@ -40,6 +50,5 @@ public class Unit extends RenderItem{
             pen.setColor(Color.black);
             pen.drawOval(x, y, 64, 64);
         }
-    
     }
 }

@@ -23,8 +23,6 @@ public class Unit extends RenderItem{
         int ty = Math.abs(this.y-y);
         int sum = tx+ty;
         if(sum<=moves) {
-            setPosX(x*128);
-            setPosY(y*128);
             this.x = x;
             this.y = y;
             return true;

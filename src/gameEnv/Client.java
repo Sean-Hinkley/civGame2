@@ -26,8 +26,10 @@ public class Client extends Environment{
 	public void leftClick(MouseEvent ke) {}
 	public void rightClick(MouseEvent ke) {}
     public void mouseClicked(MouseEvent ke) { 
-        loading.mouseClicked(ke);
+        
     }
-    public void mousePressed(MouseEvent me) {}
+    public void mousePressed(MouseEvent me) {
+        loading.mousePressed(me);
+    }
 
 }

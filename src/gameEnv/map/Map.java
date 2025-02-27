@@ -89,6 +89,7 @@ public class Map extends RenderItem{
 	}
 	public Tile getTile(int x, int y) {
 		if((x < map.length && y > 0) && (y < map.length && y > 0)) {
+			
 			return map[x][y];
 		}
 		return null;

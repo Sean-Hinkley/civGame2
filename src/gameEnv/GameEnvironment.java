@@ -77,8 +77,6 @@ public class GameEnvironment extends Environment{
 			n = m.getUnit(); 
 			chkSelected(n);
 		}
-
-		
 	}
 
 	public void chkSelected(Unit m) {
@@ -94,8 +92,8 @@ public class GameEnvironment extends Environment{
 		}
 	}
 	public void rightClick(MouseEvent ke) {
-		int x = ((ke.getX() - 8)+cam.getOffsetX() + 150)/128;
-		int y = ((ke.getY() - 32)+cam.getOffsetY() + 75)/128;
+		int x = ((ke.getX() - 8));
+		int y = ((ke.getY() - 32));
 		if(selectedUnit!= null) {
 			int tx = selectedUnit.getTileX();
 			int ty = selectedUnit.getTileY();
@@ -106,19 +104,24 @@ public class GameEnvironment extends Environment{
 		return selectedUnit;
 	}
 	public void moveTiles(int x, int y, int tx, int ty) {
-		boolean b = selectedUnit.moved(x, y);
+		boolean b = selectedUnit.moved((x+cam.getOffsetX() + 150)/128, (y+cam.getOffsetY() + 75)/128);
+
 		if(b) {
-			Tile t1 = cam.getTileCoord(x, y);
+			Tile t1 = cam.getTile(x, y);
 			Tile t2 = cam.getTileCoord(tx, ty);
-			t2.addUnit(null);
-			t1.addUnit(selectedUnit);
+			if(t1!=null && t2!=null) {
+				System.out.print("Works");
+				t2.addUnit(null);
+				t1.addUnit(selectedUnit);
+			}
+			
 		}
 	}
 	public void mousePressed(MouseEvent ke) {
-		System.out.println("Clicked");
+		//System.out.println("Clicked");
     	if(ke.getButton() == 1) {
 			leftClick(ke);
-			System.out.println("Left Clicked");
+			//System.out.println("Left Clicked");
 		}
 		if(ke.getButton() == 3) {
 			rightClick(ke);

@@ -42,7 +42,8 @@ public class MyGame extends Game  {
     	game.mouseClicked(ke);
     	
     }
-    public void mousePressed(MouseEvent me) {}
+    public void mousePressed(MouseEvent me) {game.mousePressed(me);}
+    
     public void mouseReleased(MouseEvent me) {}
     public void mouseEntered(MouseEvent me) {}
     public void mouseExited(MouseEvent me) {}

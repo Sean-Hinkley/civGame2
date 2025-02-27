@@ -39,11 +39,7 @@ public class Tile extends RenderItem{
 		return onTile;
 	}
 	public void addUnit(Unit u) {
-		if(u!=null) {
-			onTile = u;
-		} else {
-			onTile = null;
-		}
+		onTile = u;
 	}
 	public TileBiome findtype(int t) {
 		TileBiome tmp = null;

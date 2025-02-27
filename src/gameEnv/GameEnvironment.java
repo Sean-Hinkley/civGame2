@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import gameEnv.map.Map;
+import gameEnv.map.Tile;
 import gameEnv.units.Unit;
 
 public class GameEnvironment extends Environment{
@@ -13,8 +14,11 @@ public class GameEnvironment extends Environment{
 	private int mapSize = 100;
 	Camera cam;
 	Map map;
+	private Ui ui;
 	public GameEnvironment(int w, int h) {
 		super(w,h);
+		ui = new Ui(w, h,this);
+		ui.setKeyPressList(keys);
 		map = new Map(mapSize);
 		cam = new Camera(w,h,128,map);
 		selectedUnit = null;
@@ -23,6 +27,12 @@ public class GameEnvironment extends Environment{
 	public Map getMap() {
 		return map;
 	}
+
+	public void setKeyPressList(KeyPressList kpl) {
+		super.setKeyPressList(kpl);
+		ui.setKeyPressList(kpl);
+        
+    }
 	public void KeyMap() {
 		keys.addKey(87, "W");
 		keys.addKey(65, "A");
@@ -51,55 +61,71 @@ public class GameEnvironment extends Environment{
 		keys.update(this);
 	}
 	public void draw(Graphics pen) {
+
 		pen.setColor(Color.black);
 		pen.fillRect(0, 0, getWidth(), getHeight());
-		//map.draw(pen);
 		cam.draw(pen);
-		
+		ui.draw(pen);
 	}
 	public void keyTyped(KeyEvent ke) {}
 	public void leftClick(MouseEvent ke) {
-		int x = (ke.getX() - 8)/128;
-		int y = (ke.getY() - 32)/128;
-		if((x < map.size() && x > 0) && (y < map.size() && y > 0)) {
-			Unit m = map.getTile(x, y).getUnit();
-			if(m != null) {
-				selectedUnit = m;
-				m.setSelect(true);
-			}
-			else {
-				if(selectedUnit != null) {
-					selectedUnit.setSelect(false);
-					selectedUnit = null;
-				}
+		int x = ((ke.getX() - 8));
+		int y = ((ke.getY() - 32));
+		Tile m = cam.getTile(x, y);
+		Unit n = null;
+		if(m!=null) {
+			n = m.getUnit(); 
+			chkSelected(n);
+		}
+
+		
+	}
+
+	public void chkSelected(Unit m) {
+		if(m != null) {
+			selectedUnit = m;
+			m.setSelect(true);
+		}
+		else {
+			if(selectedUnit != null) {
+				selectedUnit.setSelect(false);
+				selectedUnit = null;
 			}
 		}
 	}
 	public void rightClick(MouseEvent ke) {
-		int x = (ke.getX() - 8)/128;
-		int y = (ke.getY() - 32)/128;
-		System.out.println("X: " + x);
-		System.out.println("Y: " + y);
+		int x = ((ke.getX() - 8)+cam.getOffsetX() + 150)/128;
+		int y = ((ke.getY() - 32)+cam.getOffsetY() + 75)/128;
 		if(selectedUnit!= null) {
 			int tx = selectedUnit.getTileX();
 			int ty = selectedUnit.getTileY();
-			System.out.println("TX: " + tx);
-			System.out.println("TY: " + ty);
-			boolean b = selectedUnit.moved(x, y);
-			if(b) {
-				map.getTile(tx, ty).addUnit(null);
-				map.getTile(x, y).addUnit(selectedUnit);
-
-			}	
+			moveTiles(x, y, tx, ty);
 		}
 	}
-    public void mouseClicked(MouseEvent ke) { 
+	public Unit getSelected() {
+		return selectedUnit;
+	}
+	public void moveTiles(int x, int y, int tx, int ty) {
+		boolean b = selectedUnit.moved(x, y);
+		if(b) {
+			Tile t1 = cam.getTileCoord(x, y);
+			Tile t2 = cam.getTileCoord(tx, ty);
+			t2.addUnit(null);
+			t1.addUnit(selectedUnit);
+		}
+	}
+	public void mousePressed(MouseEvent ke) {
+		System.out.println("Clicked");
     	if(ke.getButton() == 1) {
 			leftClick(ke);
+			System.out.println("Left Clicked");
 		}
 		if(ke.getButton() == 3) {
 			rightClick(ke);
-		}	
+		}
+	}
+    public void mouseClicked(MouseEvent ke) { 
+			
     }
     public void mouseReleased(MouseEvent me) {}
     public void mouseEntered(MouseEvent me) {}

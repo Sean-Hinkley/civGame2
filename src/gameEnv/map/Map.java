@@ -84,6 +84,9 @@ public class Map extends RenderItem{
 	public int size() {
 		return map.length;
 	}
+	public int size(int ind) {
+		return map[ind].length;
+	}
 	public Tile getTile(int x, int y) {
 		if((x < map.length && y > 0) && (y < map.length && y > 0)) {
 			return map[x][y];
@@ -91,8 +94,8 @@ public class Map extends RenderItem{
 		return null;
 	}
 	public void drawColliding(Graphics pen, int x, int y, int w, int h) {
-		int leftoverx = x%128;
-		int leftovery = y%128;
+		int leftoverx = (x%128)+150;
+		int leftovery = (y%128)+125;
 		int tmpx = x/128;
 		int tmpy = y/128;
 		Tile[][] tmplist = new Tile[w/128][h/128];

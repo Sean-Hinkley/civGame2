@@ -17,8 +17,8 @@ public class Tile extends RenderItem{
 		super("Tile",x,y);
 		onTile = null;
 		biome = findtype(type);
-		this.setPosX(getPosX() * size);
-		this.setPosY(getPosY() * size);
+		this.setPosX(getPosX());
+		this.setPosY(getPosY());
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);	
 		image = im;
@@ -29,8 +29,8 @@ public class Tile extends RenderItem{
 		super("Tile",x,y);
 		onTile = null;
 		biome = type;
-		this.setPosX(getPosX() * size);
-		this.setPosY(getPosY() * size);
+		this.setPosX(getPosX());
+		this.setPosY(getPosY());
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);		
 		image = im;	
@@ -94,5 +94,10 @@ public class Tile extends RenderItem{
 		pen.fillRect(x, y, getObjW(), getObjH());	
 	}
 	
+
+	public String toString() {
+		String res = "Unit:  " + onTile + ";  X: " + this.getPosX() + ";  Y: " + this.getPosY();
+		return res;
+	}
 
 }

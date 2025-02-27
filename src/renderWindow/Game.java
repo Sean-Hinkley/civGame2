@@ -47,7 +47,7 @@ public abstract class Game implements KeyListener, MouseListener, MouseMotionLis
         while (true)
         {
            game.update();
-            try { Thread.sleep(5); }
+            try { Thread.sleep(10); }
             catch (InterruptedException e) {}
             frame.repaint();
         }

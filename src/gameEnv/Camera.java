@@ -39,14 +39,42 @@ public class Camera extends RenderItem {
 	public Tile[][] getView() {
 		int tmpscl = Scale * tilesize;
 		int tmpW = ScreenWidth/tmpscl +2;
-		System.out.println("TMP W: " + tmpW);
+		//System.out.println("TMP W: " + tmpW);
 		int tmpH = ScreenHeight/tmpscl +2;
-		System.out.println("TMP H: " + tmpH);
+		//System.out.println("TMP H: " + tmpH);
 		Tile[][] mp = new Tile[tmpW][tmpH];
 		int tmpX = this.getPosX()/tmpscl;
 		int tmpY = this.getPosY()/tmpscl;
 		map.getSection(tmpX-1, tmpY-1, mp);
 		//System.out.println(mp[0][0]);
 		return mp;
+	}
+
+	public Tile getTile(int x, int y) {
+		int ttx = ((x)+getOffsetX()+150);
+		int tty = ((y)+getOffsetY()+75);
+		int tx = (ttx/128);
+		int ty = (tty/128);
+		return getTileCoord(tx, ty);
+	}
+
+	public Tile getTileCoord(int x, int y) {
+		Tile[][] tiles = getView();
+		if((x < tiles.length && x > 0) && (y < tiles[0].length && y > 0)) {
+			if(tiles[x][y]!=null)
+			{
+				System.out.println(tiles[x][y]);
+				return tiles[x+1][y+1];
+			} 
+		}
+		return null;
+	}
+	public int getOffsetX() {
+		int leftoverx = getPosX()%128;
+		return leftoverx;
+	}
+	public int getOffsetY() {
+		int leftovery = getPosY()%128;
+		return leftovery;
 	}
 }

@@ -27,16 +27,21 @@ public class Environment {
     }
 	public void keyTyped(KeyEvent ke) {}
     public void keyPressed(KeyEvent ke) {
-        //System.out.println("HeLLo");
     	this.keys.keyPressed(ke);
     }
     public void keyReleased(KeyEvent ke) {
     	this.keys.keyReleased(ke);
     }
-    public void setKeyPressList(KeyPressList kpl) {
+    public void setKeyPressList(Environment to, KeyPressList kpl) {
+
         keys = kpl;
-        KeyMap();
+        to.KeyMap();
     }
+
+    public void setKeyPressList( KeyPressList kpl) {
+        setKeyPressList(this,kpl);
+    }
+
 	public void leftClick(MouseEvent ke) {}
 
 	public void rightClick(MouseEvent ke) {}

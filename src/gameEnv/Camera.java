@@ -62,10 +62,10 @@ public class Camera extends RenderItem {
 	public Tile getTileCoord(int x, int y) {
 		Tile[][] tiles = getView();
 		if((x < tiles.length && x > 0) && (y < tiles[0].length && y > 0)) {
-			System.out.println("Tile: " + tiles[x+1][y+1]);
+			//System.out.println("Tile: " + tiles[x+1][y+1]);
 			if(tiles[x+1][y+1]!=null)
 			{
-				System.out.println("TileSelected\n\n");
+				//System.out.println("TileSelected\n\n");
 				//System.out.println(tiles[x][y]);
 				return tiles[x+1][y+1];
 			} 
@@ -81,5 +81,20 @@ public class Camera extends RenderItem {
 	public int getOffsetY() {
 		int leftovery = getPosY()%128;
 		return leftovery;
+	}
+
+	public Tile getActualTile(int x, int y) {
+		int tx = (x+getOffsetX()+150)/128;
+		int ty = (y+getOffsetY()+125)/128;
+		Tile[][] view = getView();
+
+
+		
+		if(tx>0 && tx<view.length && ty>0 && tx<view[0].length && view[tx][ty]!=null) {
+			return getTileCoord(tx, ty);
+		}
+
+		return null;
+		
 	}
 }

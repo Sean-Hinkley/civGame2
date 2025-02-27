@@ -12,7 +12,7 @@ public class Map extends RenderItem{
 		imgs = new ImgHandler();
 		map = new Tile[size][size];
 		setTiles();
-		map[2][2].addUnit(new Unit(2,2,3));
+		map[2][2].addUnit(new Unit("Warrior",2,2,3));
 	}
 	public void setTiles() {
 		int[] weights = {100,70,20,30};

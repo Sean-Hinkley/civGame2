@@ -92,27 +92,34 @@ public class GameEnvironment extends Environment{
 		}
 	}
 	public void rightClick(MouseEvent ke) {
-		int x = ((ke.getX() - 8));
-		int y = ((ke.getY() - 32));
+		int x = ke.getX()-8;
+		int y = ke.getY()-32;
 		if(selectedUnit!= null) {
-			int tx = selectedUnit.getTileX();
-			int ty = selectedUnit.getTileY();
-			moveTiles(x, y, tx, ty);
+
+			int ty= selectedUnit.getPosX();
+			int tx = selectedUnit.getPosY();
+			Tile f = cam.getActualTile(x,y);
+			System.out.println("TX: " + tx + ";  TY: " + ty);
+			System.out.println("FX: " + f.getPosX() + ";  FY: " + f.getPosY());
+			moveTiles(f.getPosX(),f.getPosY() , tx, ty );
 		}
 	}
 	public Unit getSelected() {
 		return selectedUnit;
 	}
 	public void moveTiles(int x, int y, int tx, int ty) {
-		boolean b = selectedUnit.moved((x+cam.getOffsetX() + 150)/128, (y+cam.getOffsetY() + 75)/128);
+		boolean b = selectedUnit.moved(x, y);
 
 		if(b) {
-			Tile t1 = cam.getTile(x, y);
+			Tile t1 = map.getTile(x, y);
 			Tile t2 = cam.getTileCoord(tx, ty);
 			if(t1!=null && t2!=null) {
-				System.out.print("Works");
-				t2.addUnit(null);
+				
+				t2.remUnit();
+				System.out.println(t2.getUnit());
 				t1.addUnit(selectedUnit);
+				System.out.println(t2.getUnit());
+				
 			}
 			
 		}

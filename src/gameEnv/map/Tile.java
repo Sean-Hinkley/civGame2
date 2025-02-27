@@ -17,8 +17,6 @@ public class Tile extends RenderItem{
 		super("Tile",x,y);
 		onTile = null;
 		biome = findtype(type);
-		this.setPosX(getPosX());
-		this.setPosY(getPosY());
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);	
 		image = im;
@@ -29,8 +27,6 @@ public class Tile extends RenderItem{
 		super("Tile",x,y);
 		onTile = null;
 		biome = type;
-		this.setPosX(getPosX());
-		this.setPosY(getPosY());
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);		
 		image = im;	
@@ -39,7 +35,11 @@ public class Tile extends RenderItem{
 		return onTile;
 	}
 	public void addUnit(Unit u) {
-		onTile = u;
+		this.onTile = u;
+	}
+
+	public void remUnit() {
+		this.onTile = null;
 	}
 	public TileBiome findtype(int t) {
 		TileBiome tmp = null;
@@ -68,7 +68,8 @@ public class Tile extends RenderItem{
 		drawTile(pen, x, y);
 		pen.setColor(Color.black);
 		pen.drawRect(x, y, this.getObjW(), this.getObjH());
-		if(onTile != null) {
+		if(getUnit() != null) {
+			System.out.println("X: " + getPosX() + "; Y: " + getPosY() + " OnTile: " + onTile);
 			onTile.draw(pen, x, y);
 		}
 	}

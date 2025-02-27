@@ -10,8 +10,11 @@ public class Unit extends RenderItem{
     private int x;
     private int y;
     private int moves;
-    public Unit(int x, int y, int moves) {
-        super("Unit", x*128, y*128);
+    String unitName;
+    public Unit(String name, int x, int y, int moves) {
+        super("Unit", x, y);
+        unitName = name;
+
         this.x = x;
         this.moves = moves;
         this.y = y;
@@ -30,6 +33,10 @@ public class Unit extends RenderItem{
         return false;
         
     }
+
+    public String getUnitName() {
+        return unitName;
+    }
     public int getTileX() {
         return x;
     }
@@ -39,6 +46,10 @@ public class Unit extends RenderItem{
 
     public void setSelect(boolean b) {
         selected = b;
+    }
+
+    public int getMoves() {
+        return moves;
     }
 
     public void draw(Graphics pen, int x, int y) {

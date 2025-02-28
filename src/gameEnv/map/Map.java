@@ -53,7 +53,7 @@ public class Map extends RenderItem{
 	}
 	public void drawBody(Graphics pen) {
 		pen.setColor(Color.red);
-		pen.fillRect(getPosX(), getPosY(), 128 *map.length, 128*map.length);
+		pen.fillRect(getPosX(), getPosY(), 128 *map.length, 128*map[0].length);
 		for(int x = 0; x < map.length; x++) {
 			for(int y = 0; y < map[x].length; y++) {
 				map[x][y].draw(pen);
@@ -88,8 +88,7 @@ public class Map extends RenderItem{
 		return map[ind].length;
 	}
 	public Tile getTile(int x, int y) {
-		if((x < map.length && y > 0) && (y < map.length && y > 0)) {
-			
+		if((x < map.length && y > 0) && (y < map[0].length && y > 0)) {
 			return map[x][y];
 		}
 		return null;
@@ -107,6 +106,14 @@ public class Map extends RenderItem{
 					tmplist[dx][dy].drawBody(pen, (dx*128)-leftoverx, (dy*128)-leftovery);
 				}
 				
+			}
+		}
+	}
+
+	public void nextTurn() {
+		for(int x = 0; x < map.length; x++) {
+			for(int y = 0; y < map[0].length; y++) {
+				map[x][y].nextTurn();
 			}
 		}
 	}

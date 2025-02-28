@@ -15,7 +15,7 @@ public class Tile extends RenderItem{
 	public Tile(int x, int y, int type, BufferedImage im) {
 		//x and y are measured in array placement
 		super("Tile",x,y);
-		onTile = null;
+		remUnit();
 		biome = findtype(type);
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);	
@@ -25,14 +25,15 @@ public class Tile extends RenderItem{
 	public Tile(int x, int y, TileBiome type, BufferedImage im) {
 		//x and y are measured in array placement
 		super("Tile",x,y);
-		onTile = null;
+		remUnit();
 		biome = type;
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);		
 		image = im;	
 	}
 	public Unit getUnit() {
-		return onTile;
+		//if(this.onTile!=null) System.out.println("X: " + getPosX() + "; Y: " + getPosY() + this.onTile);
+		return this.onTile;
 	}
 	public void addUnit(Unit u) {
 		this.onTile = u;
@@ -40,6 +41,7 @@ public class Tile extends RenderItem{
 
 	public void remUnit() {
 		this.onTile = null;
+		//System.out.println(this.onTile);
 	}
 	public TileBiome findtype(int t) {
 		TileBiome tmp = null;
@@ -69,7 +71,7 @@ public class Tile extends RenderItem{
 		pen.setColor(Color.black);
 		pen.drawRect(x, y, this.getObjW(), this.getObjH());
 		if(getUnit() != null) {
-			System.out.println("X: " + getPosX() + "; Y: " + getPosY() + " OnTile: " + onTile);
+			//System.out.println("X: " + getPosX() + "; Y: " + getPosY() + " OnTile: " + getUnit());
 			onTile.draw(pen, x, y);
 		}
 	}
@@ -91,9 +93,13 @@ public class Tile extends RenderItem{
 		pen.fillRect(x, y, getObjW(), getObjH());	
 	}
 	
-
+	public void nextTurn() {
+		if(onTile!=null) {
+			onTile.nextTurn();
+		}
+	}
 	public String toString() {
-		String res = "Unit:  " + onTile + ";  X: " + this.getPosX() + ";  Y: " + this.getPosY();
+		String res = "Unit:  " + getUnit() + ";  X: " + this.getPosX() + ";  Y: " + this.getPosY();
 		return res;
 	}
 

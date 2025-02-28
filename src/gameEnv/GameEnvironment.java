@@ -95,13 +95,11 @@ public class GameEnvironment extends Environment{
 		int x = ke.getX()-8;
 		int y = ke.getY()-32;
 		if(selectedUnit!= null) {
-
-			int ty= selectedUnit.getPosX();
-			int tx = selectedUnit.getPosY();
+			int tx= selectedUnit.getPosX();
+			int ty = selectedUnit.getPosY();
 			Tile f = cam.getActualTile(x,y);
-			System.out.println("TX: " + tx + ";  TY: " + ty);
-			System.out.println("FX: " + f.getPosX() + ";  FY: " + f.getPosY());
-			moveTiles(f.getPosX(),f.getPosY() , tx, ty );
+			if(f!=null) moveTiles(f.getPosX(),f.getPosY() , tx, ty );
+			
 		}
 	}
 	public Unit getSelected() {
@@ -109,14 +107,11 @@ public class GameEnvironment extends Environment{
 	}
 	public void moveTiles(int x, int y, int tx, int ty) {
 		boolean b = selectedUnit.moved(x, y);
-
 		if(b) {
 			Tile t1 = map.getTile(x, y);
-			Tile t2 = cam.getTileCoord(tx, ty);
+			Tile t2 = map.getTile(tx, ty);
 			if(t1!=null && t2!=null) {
-				
 				t2.remUnit();
-				System.out.println(t2.getUnit());
 				t1.addUnit(selectedUnit);
 				System.out.println(t2.getUnit());
 				
@@ -125,6 +120,7 @@ public class GameEnvironment extends Environment{
 		}
 	}
 	public void mousePressed(MouseEvent ke) {
+		ui.mousePressed(ke);
 		//System.out.println("Clicked");
     	if(ke.getButton() == 1) {
 			leftClick(ke);
@@ -137,6 +133,10 @@ public class GameEnvironment extends Environment{
     public void mouseClicked(MouseEvent ke) { 
 			
     }
+
+	public void nextTurn() {
+		map.nextTurn();
+	}
     public void mouseReleased(MouseEvent me) {}
     public void mouseEntered(MouseEvent me) {}
     public void mouseExited(MouseEvent me) {}

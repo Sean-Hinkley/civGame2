@@ -10,46 +10,51 @@ public class Unit extends RenderItem{
     private int x;
     private int y;
     private int moves;
+    private int moved;
     String unitName;
     public Unit(String name, int x, int y, int moves) {
         super("Unit", x, y);
         unitName = name;
-
-        this.x = x;
+        moved = 0;
         this.moves = moves;
-        this.y = y;
         selected = false;
     }
 
     public boolean moved(int x, int y) {
-        int tx = Math.abs(this.x-x);
-        int ty = Math.abs(this.y-y);
+        int tx = Math.abs(getPosX()-x);
+        int ty = Math.abs(getPosY()-y);
         int sum = tx+ty;
-        if(sum<=moves) {
-            this.x = x;
-            this.y = y;
+        if(sum<=moves-moved) {
+            moved+=sum;
+            move(x,y);
             return true;
         }
         return false;
         
     }
 
+    public void nextTurn() {
+        moved = 0;
+    }
+
+    public void move(int x, int y) {
+        setPosX(x);
+        setPosY(y);
+    }
+
     public String getUnitName() {
         return unitName;
-    }
-    public int getTileX() {
-        return x;
-    }
-    public int getTileY() {
-        return y;
     }
 
     public void setSelect(boolean b) {
         selected = b;
     }
-
     public int getMoves() {
         return moves;
+    }
+
+    public int getMoved() {
+        return moved;
     }
 
     public void draw(Graphics pen, int x, int y) {

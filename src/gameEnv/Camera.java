@@ -18,23 +18,7 @@ public class Camera extends RenderItem {
 		map = m;
 	}	
 	public void drawBody(Graphics pen) {
-		map.drawColliding(pen, getPosX(), getPosY(), getObjW(),getObjH());		
-		// Tile[][] mp = getView();
-		// //System.out.println(mp[0][0]);
-		// int tmpscl = Scale * tilesize;
-		// for(int x = 0; x < mp.length; x++) {
-		// 	for(int y = 0; y < mp[0].length; y++) {
-		// 		if(mp[x][y]!=null) {
-		// 			int getx = (x * tmpscl) + (this.getPosX()%tmpscl);
-		// 			int gety = (y * tmpscl) + (this.getPosY()%tmpscl);
-		// 			System.out.println("X: " +getx + "  Y: " + gety);
-		// 			mp[x][y].drawBody(pen, getx, gety);
-		// 		} else {
-		// 			//System.out.println("Didnt Work");
-		// 		}
-				
-		// 	}
-		// }
+		map.drawColliding(pen, getPosX(), getPosY(), getObjW(),getObjH());
 	}	
 	public Tile[][] getView() {
 		int tmpscl = Scale * tilesize;
@@ -49,7 +33,6 @@ public class Camera extends RenderItem {
 		//System.out.println(mp[0][0]);
 		return mp;
 	}
-
 	public Tile getTile(int x, int y) {
 		int ttx = ((x)+getOffsetX()+150);
 		int tty = ((y)+getOffsetY()+125);
@@ -57,7 +40,6 @@ public class Camera extends RenderItem {
 		int ty = (tty/128);
 		return getTileCoord(tx, ty);
 	}
-
 	public Tile getTileCoord(int x, int y) {
 		Tile[][] tiles = getView();
 		if((x+1 < tiles.length && x+1 > 0) && (y+1 < tiles[0].length && y+1 > 0)) {
@@ -67,10 +49,8 @@ public class Camera extends RenderItem {
 				//System.out.println("TileSelected\n\n");
 				//System.out.println(tiles[x][y]);
 				return tiles[x+1][y+1];
-			} 
-
+			}
 		}
-		
 		return null;
 	}
 	public int getOffsetX() {
@@ -81,19 +61,13 @@ public class Camera extends RenderItem {
 		int leftovery = getPosY()%128;
 		return leftovery;
 	}
-
 	public Tile getActualTile(int x, int y) {
 		int tx = (x+getOffsetX()+150)/128;
 		int ty = (y+getOffsetY()+125)/128;
 		Tile[][] view = getView();
-
-
-		
 		if(tx>0 && tx<view.length && ty>0 && ty<view[0].length && view[tx][ty]!=null) {
 			return getTileCoord(tx, ty);
 		}
-
 		return null;
-		
 	}
 }

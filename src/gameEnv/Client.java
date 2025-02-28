@@ -4,16 +4,20 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import gameEnv.Leader.Leader;
+
 public class Client extends Environment{
     Environment[] allEnvironments;
     Environment loading;
     Camera cam;
+    
     public Client(int w, int h) {
         super(w,h);
         allEnvironments = new Environment[3];
         allEnvironments[0] = new GameEnvironment(w, h);
         loading = allEnvironments[0];
         loading.setKeyPressList(keys);
+        
     }
 	public void draw(Graphics pen) {
         if(loading!=null) loading.draw(pen);	

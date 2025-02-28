@@ -5,9 +5,10 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import gameEnv.Leader.Leader;
+import gameEnv.Leader.Units.Unit;
 import gameEnv.map.Map;
 import gameEnv.map.Tile;
-import gameEnv.units.Unit;
 
 public class GameEnvironment extends Environment{
 	private Unit selectedUnit;
@@ -15,23 +16,27 @@ public class GameEnvironment extends Environment{
 	Camera cam;
 	Map map;
 	private Ui ui;
+	Leader leader;
+	ImgHandler img;
 	public GameEnvironment(int w, int h) {
 		super(w,h);
+		img = new ImgHandler();
+		leader = new Leader("Base",map);
 		ui = new Ui(w, h,this);
 		ui.setKeyPressList(keys);
 		map = new Map(mapSize);
+		leader = new Leader("Base",map);
 		cam = new Camera(w,h,128,map);
 		selectedUnit = null;
+		leader.addUnit(new Unit("Settler", leader, 2, 2, 4), 2,2);
 		KeyMap();
 	}
 	public Map getMap() {
 		return map;
 	}
-
 	public void setKeyPressList(KeyPressList kpl) {
 		super.setKeyPressList(kpl);
 		ui.setKeyPressList(kpl);
-        
     }
 	public void KeyMap() {
 		keys.addKey(87, "W");
@@ -41,19 +46,15 @@ public class GameEnvironment extends Environment{
 	}
 	public void actions(String phrase) {
 		if(phrase.equals("W")) {
-			System.out.println("W");
 			cam.setPosY(cam.getPosY()-5);
 		} 
 		if(phrase.equals("A")) {
-			System.out.println("A");
 			cam.setPosX(cam.getPosX()-5);
 		}
 		if(phrase.equals("S")) {
-			System.out.println("S");
 			cam.setPosY(cam.getPosY()+5);
 		}
 		if(phrase.equals("D")) {
-			System.out.println("D");
 			cam.setPosX(cam.getPosX()+5);
 		}
 	}
@@ -61,7 +62,6 @@ public class GameEnvironment extends Environment{
 		keys.update(this);
 	}
 	public void draw(Graphics pen) {
-
 		pen.setColor(Color.black);
 		pen.fillRect(0, 0, getWidth(), getHeight());
 		cam.draw(pen);
@@ -72,23 +72,28 @@ public class GameEnvironment extends Environment{
 		int x = ((ke.getX() - 8));
 		int y = ((ke.getY() - 32));
 		Tile m = cam.getTile(x, y);
-		Unit n = null;
 		if(m!=null) {
-			n = m.getUnit(); 
-			chkSelected(n);
+			chkSelected(m);
 		}
 	}
 
-	public void chkSelected(Unit m) {
-		if(m != null) {
-			selectedUnit = m;
-			m.setSelect(true);
-		}
-		else {
-			if(selectedUnit != null) {
+	public Camera getCamera() {
+		return cam;
+	}
+
+	public void chkSelected(Tile m) {
+		if(m != null && m.getUnit()!=null) {
+			if(selectedUnit!=null) {
 				selectedUnit.setSelect(false);
 				selectedUnit = null;
 			}
+			
+			selectedUnit = m.getUnit();
+			selectedUnit.setSelect(true);
+			
+		} else if (m!=null && selectedUnit!=null) {
+			selectedUnit.setSelect(false);
+			selectedUnit = null;
 		}
 	}
 	public void rightClick(MouseEvent ke) {
@@ -108,32 +113,21 @@ public class GameEnvironment extends Environment{
 	public void moveTiles(int x, int y, int tx, int ty) {
 		boolean b = selectedUnit.moved(x, y);
 		if(b) {
-			Tile t1 = map.getTile(x, y);
-			Tile t2 = map.getTile(tx, ty);
-			if(t1!=null && t2!=null) {
-				t2.remUnit();
-				t1.addUnit(selectedUnit);
-				System.out.println(t2.getUnit());
-				
-			}
-			
+			//selectedUnit.move(x, y);
+			map.removeUnit(tx, ty);
+			map.addUnit(selectedUnit, x, y);
 		}
 	}
 	public void mousePressed(MouseEvent ke) {
 		ui.mousePressed(ke);
-		//System.out.println("Clicked");
     	if(ke.getButton() == 1) {
 			leftClick(ke);
-			//System.out.println("Left Clicked");
 		}
 		if(ke.getButton() == 3) {
 			rightClick(ke);
 		}
 	}
-    public void mouseClicked(MouseEvent ke) { 
-			
-    }
-
+    public void mouseClicked(MouseEvent ke) {}
 	public void nextTurn() {
 		map.nextTurn();
 	}
@@ -145,5 +139,9 @@ public class GameEnvironment extends Environment{
 	}	
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub	
+	}
+
+	public Leader getLeader() {
+		return leader;
 	}
 }

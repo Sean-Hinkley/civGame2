@@ -2,7 +2,8 @@ package gameEnv.map;
 import java.awt.Color;
 import java.awt.Graphics;
 import gameEnv.ImgHandler;
-import gameEnv.units.Unit;
+import gameEnv.Leader.Builds.Town;
+import gameEnv.Leader.Units.Unit;
 import renderWindow.RenderItem;
 public class Map extends RenderItem{
 	private Tile[][] map;
@@ -10,9 +11,9 @@ public class Map extends RenderItem{
 	public Map(int size) {
 		super("Map",0,0);
 		imgs = new ImgHandler();
+		imgs.addImage(title, "C:\\Users\\se.g.hinkley\\Desktop\\repos\\civGame2\\src\\gameEnv\\map\\Imgs\\Grass.png");
 		map = new Tile[size][size];
 		setTiles();
-		map[2][2].addUnit(new Unit("Warrior",2,2,3));
 	}
 	public void setTiles() {
 		int[] weights = {100,70,20,30};
@@ -88,7 +89,7 @@ public class Map extends RenderItem{
 		return map[ind].length;
 	}
 	public Tile getTile(int x, int y) {
-		if((x < map.length && y > 0) && (y < map[0].length && y > 0)) {
+		if((x < map.length && x > 0) && (y < map[0].length && y > 0)) {
 			return map[x][y];
 		}
 		return null;
@@ -117,5 +118,25 @@ public class Map extends RenderItem{
 			}
 		}
 	}
-	
+	public void addUnit(Unit u, int x, int y) {
+		if((x < map.length && x > 0) && (y < map[0].length && y > 0)) {
+			Tile t = getTile(x, y);
+			if(t.getUnit()==null)t.addUnit(u);
+		}
+	}
+
+	public void removeUnit(int x, int y) {
+		Tile t = getTile(x, y);
+		if(t.getUnit()!=null) t.remUnit();
+	}
+
+	public void addTown(Town t,int x, int y) {
+		Tile f = getTile(x, y);
+		f.setTown(t);
+	}
+
+	public void removeTown(int x, int y) {
+		Tile t = getTile(x, y);
+		if(t.getTown()!=null) t.remTown();
+	}
 }

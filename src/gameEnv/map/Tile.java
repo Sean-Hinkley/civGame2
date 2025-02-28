@@ -3,11 +3,14 @@ package gameEnv.map;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import gameEnv.units.Unit;
+
+import gameEnv.Leader.Builds.Town;
+import gameEnv.Leader.Units.Unit;
 import renderWindow.RenderItem;
 
 public class Tile extends RenderItem{
 	private Unit onTile;
+	private Town town;
 	private BufferedImage image;
 	private int size = 128;
 	private int scale = 1;
@@ -15,12 +18,15 @@ public class Tile extends RenderItem{
 	public Tile(int x, int y, int type, BufferedImage im) {
 		//x and y are measured in array placement
 		super("Tile",x,y);
+		town = null;
 		remUnit();
 		biome = findtype(type);
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);	
 		image = im;
 	}
+
+	
 
 	public Tile(int x, int y, TileBiome type, BufferedImage im) {
 		//x and y are measured in array placement
@@ -30,6 +36,18 @@ public class Tile extends RenderItem{
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);		
 		image = im;	
+	}
+
+	public Town getTown() {
+		return town;
+	}
+
+	public void setTown(Town t) {
+		town = t;
+	}
+
+	public void remTown() {
+		town = null;
 	}
 	public Unit getUnit() {
 		//if(this.onTile!=null) System.out.println("X: " + getPosX() + "; Y: " + getPosY() + this.onTile);
@@ -74,23 +92,31 @@ public class Tile extends RenderItem{
 			//System.out.println("X: " + getPosX() + "; Y: " + getPosY() + " OnTile: " + getUnit());
 			onTile.draw(pen, x, y);
 		}
+
+		if(getTown()!=null) {
+			town.draw(pen,x,y);
+		}
 	}
 	public void drawTile(Graphics pen, int x, int y) {
+		this.setObjW(size * scale);
+		this.setObjH(size * scale);
 		if(biome == TileBiome.plains) {
-			pen.setColor(Color.green);
+			pen.drawImage(image, x, y, null);
 		}
 		if(biome == TileBiome.woods) {
 			pen.setColor(new Color(0,200,0));
+			pen.fillRect(x, y, getObjW(), getObjH());
 		}
 		if(biome == TileBiome.water) {
 			pen.setColor(new Color(0,0,200));
+			pen.fillRect(x, y, getObjW(), getObjH());
 		}
 		if(biome == TileBiome.sand) {
 			pen.setColor(new Color(200,200,0));
+			pen.fillRect(x, y, getObjW(), getObjH());
 		}
-		this.setObjW(size * scale);
-		this.setObjH(size * scale);
-		pen.fillRect(x, y, getObjW(), getObjH());	
+		
+			
 	}
 	
 	public void nextTurn() {

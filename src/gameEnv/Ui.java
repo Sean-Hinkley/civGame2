@@ -7,7 +7,8 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 import gameEnv.GameEnvironment;
-import gameEnv.units.Unit;
+import gameEnv.Leader.Units.Unit;
+import gameEnv.Leader.Units.Unit.Ability;
 
 public class Ui extends Environment {
     private GameEnvironment game;
@@ -34,11 +35,55 @@ public class Ui extends Environment {
     public class UnitUi extends Environment{
             GameEnvironment game;
             int x,y;
+            Button[] abilities;
             public UnitUi(int w, int h, GameEnvironment g) {
                 super(w, h);
+                abilities = new Button[4];
                 game = g;
                 x = 1100;
                 y = 600;
+                System.out.print("\n\nCow");
+                setButtons();
+
+            }
+
+            public void setButtons() {
+                abilities[0] = new Button("Name", x+50, y+150) {
+                    @Override
+                    public void action() {
+                        
+                        Ability a = game.getSelected().getAbility(0);
+                        System.out.print("\n\nCow"+a);
+                        a.actions();                        
+                    }
+                };
+                abilities[1] = new Button("Name", x+150, y+150) {
+                    @Override
+                    public void action() {
+                        Ability a = game.getSelected().getAbility(1);
+                        System.out.print("Nuull\n\n\n" + a);
+                        a.actions();                        
+                    }
+                };
+
+                abilities[2] = new Button("Name", x+250, y+150) {
+                    @Override
+                    public void action() {
+                        Ability a = game.getSelected().getAbility(2);
+                        a.actions();                        
+                    }
+                };
+
+                abilities[3] = new Button("Name", x+350, y+150) {
+                    @Override
+                    public void action() {
+                        Ability a = game.getSelected().getAbility(3);
+                        a.actions();                        
+                    }
+                };
+
+                
+                //System.out.println(abilities[0]);
             }
             public void draw(Graphics pen) {
                 if(game.getSelected()!=null) {
@@ -46,6 +91,7 @@ public class Ui extends Environment {
                     pen.fillRect(x, y, 500, 200);
                     drawMoves(pen);
                     drawTitle(pen);
+                    drawAbility(pen);
                 }
             }
             public void drawMoves(Graphics pen) {
@@ -62,6 +108,66 @@ public class Ui extends Environment {
                 String name = game.getSelected().getUnitName();
                 pen.drawString(name, x+50, y+50);
             }
+
+            public void drawAbility(Graphics pen) {
+                
+                for(int a = 0; a < abilities.length; a++) {
+                    
+                    if(abilities[a]!=null) {
+                        abilities[a].draw(pen);
+                    }
+                } 
+            }
+
+            public void collision(int x, int y) {
+                if(x > this.x && x < this.x+getWidth() && y > this.y && y < this.y+getHeight()) {
+                    for(int n = 0; n < 4; n++) {
+                        System.out.println(abilities[n]!=null);
+                        if(abilities[n]!=null) abilities[n].collision(x, y);
+                    }
+                    
+                }
+            }
+
+            
+    }
+
+    public class Button {
+        int x;
+        int width;
+        int y;
+        int height;
+        public Button(String n,int x, int y) {
+            this.x = x;
+            this.y = y;
+            width = 25;
+            height = 25;
+        }
+
+        public void draw(Graphics pen) {
+            //System.out.println("drawing");
+            pen.setColor(Color.pink);
+            pen.fillRect(x, y, width, height);
+        }
+
+        public void action() {
+
+        }
+
+        public void pressed() {
+            action();
+        }
+
+        public void collision(int x, int y) {
+            System.out.println("X:  " + x + ";  Y:  " + y);
+            System.out.println("TX:  " + this.x + ";  TY:  " + this.y);
+            System.out.println("FX:  " + (this.x + width)+ ";  FY:  " +(this.y+height) );
+            if((x > this.x && x < this.x+width) && (y > this.y && y < this.y+height)) {
+                System.out.println("in here");
+                pressed();
+                
+            }
+        }
     }
 
     public class TurnButton extends Environment {
@@ -85,7 +191,7 @@ public class Ui extends Environment {
 
             public void collision(int x, int y) {
                 if(x > this.x && x < this.x+getWidth() && y > this.y && y < this.y+getHeight()) {
-                    System.out.println("Clicked");
+                    //System.out.println("Clicked");
                     game.nextTurn();
                 }
             }
@@ -105,12 +211,12 @@ public class Ui extends Environment {
                 pen.setColor(new Color(0,70,120));
                 pen.fillRect(x, y, getWidth(), getHeight());
                 pen.setColor(Color.BLACK);
-                pen.fillRoundRect(x+100, y, 50, 25, 20, 25);
+                pen.fillRoundRect(x+100, y, 100, 25, 20, 25);
                 pen.setColor(new Color(0,70,255));
                 pen.fillOval(x+100, y, 25, 25);
-                String put = "+" ;
+                String put = "+ " + game.leader.getResearchPerTurn();
                 pen.setColor(Color.white);
-                pen.setFont(new Font("Ariel", Font.BOLD, 20));
+                pen.setFont(new Font("Ariel", Font.PLAIN, 20));
                 pen.drawString(put, x+125, y+20);
 
             }
@@ -120,7 +226,12 @@ public class Ui extends Environment {
     public void mousePressed(MouseEvent ke) {
 		
     	if(ke.getButton()==1) {
-            tb.collision(ke.getX(), ke.getY());
+            int ttx = ((ke.getX())-8);
+            int tty = ((ke.getY())-32);
+            
+            tb.collision(ttx, tty);
+            units.collision(ttx, tty);
         }
 	}
+
 }

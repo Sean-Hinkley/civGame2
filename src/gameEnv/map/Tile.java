@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import gameEnv.ImgHandler;
 import gameEnv.Leader.Builds.Town;
 import gameEnv.Leader.Units.Unit;
 import renderWindow.RenderItem;
@@ -15,7 +16,8 @@ public class Tile extends RenderItem{
 	private int size = 128;
 	private int scale = 1;
 	private TileBiome biome;
-	public Tile(int x, int y, int type, BufferedImage im) {
+	private ImgHandler imagehandler;
+	public Tile(int x, int y, int type, ImgHandler imgh) {
 		//x and y are measured in array placement
 		super("Tile",x,y);
 		town = null;
@@ -23,23 +25,44 @@ public class Tile extends RenderItem{
 		biome = findtype(type);
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);	
-		image = im;
+		imagehandler = imgh;
 	}
 
 	
 
-	public Tile(int x, int y, TileBiome type, BufferedImage im) {
+	public Tile(int x, int y, TileBiome type, ImgHandler imgh) {
 		//x and y are measured in array placement
 		super("Tile",x,y);
 		remUnit();
 		biome = type;
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);		
-		image = im;	
+		imagehandler = imgh;
+		image = setImg(type);
 	}
 
 	public Town getTown() {
 		return town;
+	}
+
+	public BufferedImage setImg(TileBiome tb) {
+		BufferedImage ret = null;
+		if(tb == TileBiome.plains) {
+			ret = imagehandler.getImg(imagehandler.chkImg(title, "C:\\Users\\seang\\Desktop\\civGame2\\src\\gameEnv\\map\\Imgs\\Grass.png"));
+		}
+		if(tb == TileBiome.woods) {
+			ret = imagehandler.getImg(imagehandler.chkImg(title, "C:\\Users\\seang\\Desktop\\civGame2\\src\\gameEnv\\map\\Imgs\\Woods.png"));
+		}
+
+		if(tb == TileBiome.sand) {
+			ret = imagehandler.getImg(imagehandler.chkImg(title, "C:\\Users\\seang\\Desktop\\civGame2\\src\\gameEnv\\map\\Imgs\\Sand.png"));
+		}
+		if(tb == TileBiome.water) {
+			ret = imagehandler.getImg(imagehandler.chkImg(title, "C:\\Users\\seang\\Desktop\\civGame2\\src\\gameEnv\\map\\Imgs\\Water.png"));
+		}
+
+
+		return ret;
 	}
 
 	public void setTown(Town t) {
@@ -100,21 +123,7 @@ public class Tile extends RenderItem{
 	public void drawTile(Graphics pen, int x, int y) {
 		this.setObjW(size * scale);
 		this.setObjH(size * scale);
-		if(biome == TileBiome.plains) {
-			pen.drawImage(image, x, y, null);
-		}
-		if(biome == TileBiome.woods) {
-			pen.setColor(new Color(0,200,0));
-			pen.fillRect(x, y, getObjW(), getObjH());
-		}
-		if(biome == TileBiome.water) {
-			pen.setColor(new Color(0,0,200));
-			pen.fillRect(x, y, getObjW(), getObjH());
-		}
-		if(biome == TileBiome.sand) {
-			pen.setColor(new Color(200,200,0));
-			pen.fillRect(x, y, getObjW(), getObjH());
-		}
+		pen.drawImage(image, x, y, null);
 		
 			
 	}

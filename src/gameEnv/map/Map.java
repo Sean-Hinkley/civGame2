@@ -1,6 +1,11 @@
 package gameEnv.map;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+
 import gameEnv.ImgHandler;
 import gameEnv.Leader.Builds.Town;
 import gameEnv.Leader.Units.Unit;
@@ -11,7 +16,8 @@ public class Map extends RenderItem{
 	public Map(int size) {
 		super("Map",0,0);
 		imgs = new ImgHandler();
-		imgs.addImage(title, "C:\\Users\\se.g.hinkley\\Desktop\\repos\\civGame2\\src\\gameEnv\\map\\Imgs\\Grass.png");
+		
+		imgs.chkImg(title, "C:\\Users\\seang\\Desktop\\civGame2\\src\\gameEnv\\map\\Imgs\\Grass.png");
 		map = new Tile[size][size];
 		setTiles();
 	}
@@ -20,7 +26,7 @@ public class Map extends RenderItem{
 		for(int x = 0; x < map.length; x++) {
 			for(int y = 0; y < map[x].length; y++) {
 				TileBiome randTile = rng(weights);
-				map[x][y] = new Tile(x,y,randTile,imgs.getImg(0));
+				map[x][y] = new Tile(x,y,randTile,imgs);
 			}
 		}
 	}

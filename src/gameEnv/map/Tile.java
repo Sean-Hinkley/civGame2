@@ -48,17 +48,17 @@ public class Tile extends RenderItem{
 	public BufferedImage setImg(TileBiome tb) {
 		BufferedImage ret = null;
 		if(tb == TileBiome.plains) {
-			ret = imagehandler.getImg(imagehandler.chkImg(title, "C:\\Users\\seang\\Desktop\\civGame2\\src\\gameEnv\\map\\Imgs\\Grass.png"));
+			ret = imagehandler.getImg(imagehandler.chkImg(title, "src\\gameEnv\\map\\Imgs\\Grass.png"));
 		}
 		if(tb == TileBiome.woods) {
-			ret = imagehandler.getImg(imagehandler.chkImg(title, "C:\\Users\\seang\\Desktop\\civGame2\\src\\gameEnv\\map\\Imgs\\Woods.png"));
+			ret = imagehandler.getImg(imagehandler.chkImg(title, "src\\gameEnv\\map\\Imgs\\Woods.png"));
 		}
 
 		if(tb == TileBiome.sand) {
-			ret = imagehandler.getImg(imagehandler.chkImg(title, "C:\\Users\\seang\\Desktop\\civGame2\\src\\gameEnv\\map\\Imgs\\Sand.png"));
+			ret = imagehandler.getImg(imagehandler.chkImg(title, "src\\gameEnv\\map\\Imgs\\Sand.png"));
 		}
 		if(tb == TileBiome.water) {
-			ret = imagehandler.getImg(imagehandler.chkImg(title, "C:\\Users\\seang\\Desktop\\civGame2\\src\\gameEnv\\map\\Imgs\\Water.png"));
+			ret = imagehandler.getImg(imagehandler.chkImg(title, "src\\gameEnv\\map\\Imgs\\Water.png"));
 		}
 
 

@@ -17,7 +17,7 @@ public class Map extends RenderItem{
 		super("Map",0,0);
 		imgs = new ImgHandler();
 		
-		imgs.chkImg(title, "C:\\Users\\seang\\Desktop\\civGame2\\src\\gameEnv\\map\\Imgs\\Grass.png");
+		
 		map = new Tile[size][size];
 		setTiles();
 	}

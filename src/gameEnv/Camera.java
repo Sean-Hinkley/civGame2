@@ -1,5 +1,7 @@
 package gameEnv;
 import java.awt.Graphics;
+import java.awt.event.MouseWheelEvent;
+
 import gameEnv.map.Map;
 import gameEnv.map.Tile;
 import renderWindow.RenderItem;
@@ -16,9 +18,22 @@ public class Camera extends RenderItem {
 		tilesize = size;
 		Scale = .2;
 		map = m;
+		setScale(.5);
 	}	
+
+	public void movescaleUp() {
+		if(Scale<1.5) setScale(Scale+.1);
+	}
+	public void movescaleDown() {
+		if(Scale > .5)setScale(Scale-.1);
+	}
+
+	public void setScale(double s) {
+		Scale = s;
+		map.setScale(s);
+	}
 	public void drawBody(Graphics pen) {
-		System.out.println(getsizeScale());
+		//System.out.println(getsizeScale());
 		map.drawColliding(pen, getPosX(), getPosY(), getObjW(),getObjH());
 	}	
 	public Tile[][] getView() {
@@ -74,4 +89,9 @@ public class Camera extends RenderItem {
 		}
 		return null;
 	}
+
+	public void mouseWheelMoved(MouseWheelEvent e) {
+        if(e.getWheelRotation()<0)    movescaleUp();
+        if(e.getWheelRotation()>0)    movescaleDown();
+    }
 }

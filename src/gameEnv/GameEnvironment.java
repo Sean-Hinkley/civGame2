@@ -28,7 +28,7 @@ public class GameEnvironment extends Environment{
 		leader = new Leader("Base",map);
 		cam = new Camera(w,h,128,map);
 		selectedUnit = null;
-		leader.addUnit(new Unit("Settler", leader, 2, 2, 4), 2,2);
+		//leader.addUnit(new Unit("Settler", leader, 2, 2, 4), 2,2);
 		KeyMap();
 	}
 	public Map getMap() {

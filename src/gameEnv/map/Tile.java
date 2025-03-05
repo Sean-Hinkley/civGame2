@@ -14,9 +14,10 @@ public class Tile extends RenderItem{
 	private Town town;
 	private BufferedImage image;
 	private int size = 128;
-	private double scale = .2;
+	private double scale = 1.0;
 	private TileBiome biome;
 	private ImgHandler imagehandler;
+	private boolean set;
 	public Tile(int x, int y, int type, ImgHandler imgh) {
 		//x and y are measured in array placement
 		super("Tile",x,y);
@@ -26,8 +27,10 @@ public class Tile extends RenderItem{
 		this.setObjW((int)(size * scale));
 		this.setObjH((int)(size * scale));	
 		imagehandler = imgh;
+		
 	}
 
+	
 	
 
 	public Tile(int x, int y, TileBiome type, ImgHandler imgh) {
@@ -39,6 +42,16 @@ public class Tile extends RenderItem{
 		this.setObjH((int)(size * scale));			
 		imagehandler = imgh;
 		image = setImg(type);
+		setSet(false);
+	}
+
+	public void setSet(boolean b) {
+		set = b;
+		System.out.println(set);
+	} 
+
+	public boolean getSet() {
+		return set;
 	}
 
 	public Town getTown() {
@@ -65,8 +78,28 @@ public class Tile extends RenderItem{
 		return ret;
 	}
 
+
+	public void setScale(double s) {
+		scale = s;
+		setObjW(getsizeScale());
+		setObjH(getsizeScale());
+	}
+
+	public TileBiome getbiome() {
+		return biome;
+	}
+
+	public void setBiome(TileBiome tb) {
+		biome = tb;
+		image = setImg(tb);
+	}
+
 	public void setTown(Town t) {
 		town = t;
+	}
+
+	public int getsizeScale() {
+		return (int) (size*scale);
 	}
 
 	public void remTown() {
@@ -109,25 +142,19 @@ public class Tile extends RenderItem{
 		
 		this.setObjW((int)(size * scale));
 		this.setObjH((int)(size * scale));
-		imagehandler.resize(getObjW(), getObjH());
 		drawTile(pen, x, y);
 		pen.setColor(Color.black);
 		pen.drawRect(x, y, this.getObjW(), this.getObjH());
 		if(getUnit() != null) {
-			//System.out.println("X: " + getPosX() + "; Y: " + getPosY() + " OnTile: " + getUnit());
-			//System.out.println(getObjH());	
-			imagehandler.resize(getObjW(), getObjH());
-			onTile.draw(pen, x, y);
+			onTile.draw(pen, x, y,getsizeScale());
 		}
 
 		if(getTown()!=null) {
-			town.draw(pen,x,y);
+			town.draw(pen,x,y,getsizeScale());
 		}
 	}
 	public void drawTile(Graphics pen, int x, int y) {
-		this.setObjW((int)(size * scale));
-		this.setObjH((int)(size * scale));	
-		pen.drawImage(image, x, y, null);
+		pen.drawImage(image, x, y,getsizeScale(),getsizeScale(), null);
 		
 			
 	}

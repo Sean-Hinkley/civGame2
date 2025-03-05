@@ -1,5 +1,6 @@
 package gameEnv;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -45,7 +46,7 @@ public class ImgHandler {
 	public void resize(int w, int h) {
 		for(int x = 0; x < imgList.size(); x++) {
 			Img im = imgList.get(x);
-			System.out.println("W" + w + " H" + h);
+			//System.out.println("W" + w + " H" + h);
 			im.resize(w,h);
 		}
 	}
@@ -60,7 +61,7 @@ public class ImgHandler {
 			try {
 				//System.out.println(im);
 				img = ImageIO.read(new File(im));
-				resize(200, 200);
+				resize(128, 128);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -73,8 +74,8 @@ public class ImgHandler {
 		public String getimgStr() {
 			return imgstr;
 		}
-		public void resize(int h, int w) {
-			System.out.println("W" + w + " H" + h);
+		public void resize(int w, int h) {
+			//System.out.println("W" + w + " H" + h);
 		    BufferedImage dimg = new BufferedImage(w, h, img.getType());
 		    Graphics2D g = dimg.createGraphics();
 		    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
@@ -82,6 +83,7 @@ public class ImgHandler {
 		    g.drawImage(img, 0, 0, w, h, null);
 		    g.dispose();
 		    img = dimg;
+			//System.out.println(img.getWidth());
 		}
 		public BufferedImage getImg() {
 			return img;

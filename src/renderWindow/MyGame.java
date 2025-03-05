@@ -3,10 +3,12 @@ package renderWindow;
 //import java.awt.Color;
 //import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.AdjustmentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 //import java.io.IOException;
 //import java.util.ArrayList;
+import java.awt.event.MouseWheelEvent;
 
 import gameEnv.Client;
 
@@ -53,6 +55,14 @@ public class MyGame extends Game  {
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub	
 	}
+
+   public void MouseWheelListener(MouseWheelEvent me) {
+    
+   }
     //Launches the Game
-    public static void main(String[] args) { new MyGame().start(TITLE, SCREEN_WIDTH,SCREEN_HEIGHT); }    
+    public static void main(String[] args) { new MyGame().start(TITLE, SCREEN_WIDTH,SCREEN_HEIGHT); }
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        this.game.mouseWheelMoved(e);
+    }    
 }

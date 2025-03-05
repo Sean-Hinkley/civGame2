@@ -12,9 +12,9 @@ public class Town extends RenderItem{
         leader = l;
     }
 
-    public void draw(Graphics pen,int x, int y) {
+    public void draw(Graphics pen,int x, int y, int sizescale) {
         pen.setColor(leader.getColor());
-        pen.fillRect(x+14, y+14, 100, 100);
+        pen.fillRect(x+sizescale/4, y+sizescale/4, sizescale/2, sizescale/2);
     }
     
 }

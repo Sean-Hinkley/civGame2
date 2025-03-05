@@ -87,12 +87,12 @@ public class Unit extends RenderItem{
         return null;
     }
 
-    public void draw(Graphics pen, int x, int y) {
+    public void draw(Graphics pen, int x, int y, int sizescale) {
         pen.setColor(Color.red);
-        pen.fillOval(x, y, 64, 64);
+        pen.fillOval(x+ sizescale/4, y+ sizescale/4, sizescale/2, sizescale/2);
         if(selected) {
             pen.setColor(Color.black);
-            pen.drawOval(x, y, 64, 64);
+            pen.drawOval(x, y, sizescale, sizescale);
         }
     }
 

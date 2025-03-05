@@ -3,8 +3,10 @@ package gameEnv;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 
 import gameEnv.Leader.Leader;
+import renderWindow.Game;
 
 public class Client extends Environment{
     Environment[] allEnvironments;
@@ -15,6 +17,8 @@ public class Client extends Environment{
         super(w,h);
         allEnvironments = new Environment[3];
         allEnvironments[0] = new GameEnvironment(w, h);
+        GameEnvironment g = ((GameEnvironment)allEnvironments[0]);
+        cam = g.getCamera();
         loading = allEnvironments[0];
         loading.setKeyPressList(keys);
         
@@ -35,5 +39,9 @@ public class Client extends Environment{
     public void mousePressed(MouseEvent me) {
         loading.mousePressed(me);
     }
+
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        cam.mouseWheelMoved(e);
+    } 
 
 }

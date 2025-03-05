@@ -11,30 +11,65 @@ import gameEnv.Leader.Builds.Town;
 import gameEnv.Leader.Units.Unit;
 import renderWindow.RenderItem;
 public class Map extends RenderItem{
-	double scale = .2;
+	double scale = 1.0;
 	private Tile[][] map;
 	private ImgHandler imgs;
+	private int tilesize = 128;
 	public Map(int size) {
 		super("Map",0,0);
 		imgs = new ImgHandler();
 		
 		
-		map = new Tile[200][75];
-		setTiles();
+		map = new Tile[25][25];
+		fillTiles();
 	}
-	public void setTiles() {
-		int[] weights = {100,70,20,30};
+	public void fillTiles() {
+		
 		for(int x = 0; x < map.length; x++) {
 			for(int y = 0; y < map[x].length; y++) {
-				TileBiome randTile = rng(weights);
-				map[x][y] = new Tile(x,y,randTile,imgs);
+				map[x][y] = new Tile(x,y,TileBiome.water,imgs);
+				System.out.println(map[x][y]);
 			}
 		}
+
+		setTiles();
 	}
 
-	public void setTile(int x, int y) {
+	public void setTiles() {
+		int startx = (int)(map.length/2);
+		int starty = (int)(map[0].length/2);
+		int[] weights = {100,100,50,100};
+		setTile(startx, starty,0,0,weights);
+	}	
 
+	public void setTile(int x, int y, int xdistance, int ydistance, int[] weights) {
+		TileBiome randTile = rng(weights);
+		int sum = (xdistance+ydistance)*5;
+		weights[2]+=sum;
+
+		if(x > 0 && x < map.length && y > 0 && y < map[0].length) {
+			//System.out.println(map[x][y]);
+			if(map[x][y].getSet() == false) {
+				//System.out.println(randTile);
+				map[x][y].setSet(true);
+				map[x][y].setBiome(randTile);
+				setTile(x+1, y, xdistance+1,ydistance, weights);
+				setTile(x-1, y, xdistance+1,ydistance, weights);
+				setTile(x, y+1, xdistance,ydistance+1, weights);
+				setTile(x, y-1, xdistance,ydistance+1, weights);
+			}
+		}
+		
 	}
+
+	public void setScale(double s) {
+		scale = s;
+		for(int x = 0; x < map.length; x++) {
+			for(int y = 0; y < map[0].length; y++) {
+				if(map[x][y]!=null) map[x][y].setScale(s);
+			}
+		}
+	} 
 	public TileBiome rng(int[] weights) {
 		int sum = 0;
 		int[] tmpweights = new int[weights.length]; 
@@ -64,7 +99,8 @@ public class Map extends RenderItem{
 		return tiles[rand];
 	}
 	public int getsizeScale() {
-		return (int)(size()*scale);
+		//System.out.println(tilesize*scale);
+		return (int)(tilesize*scale);
 	}
 	public void drawBody(Graphics pen) {
 		pen.setColor(Color.red);
@@ -86,10 +122,11 @@ public class Map extends RenderItem{
 	public void getSection(int x, int y, Tile[][] tiles) {
 		for(int f = 0; f < tiles.length; f++) {
 			for(int s = 0; s < tiles[0].length; s++) {
-				if((f+x<0 || s+y<0)  || (f+x > map.length || s+y > map[0].length)) {
-					tiles[f][s] = null;
-				} else {
+				if((f+x>0 && s+y>0)  && (f+x < map.length && s+y < map[0].length)) {
 					tiles[f][s] = map[f+x][s+y];
+					
+				} else {
+					tiles[f][s] = null;
 				}
 				
 			}

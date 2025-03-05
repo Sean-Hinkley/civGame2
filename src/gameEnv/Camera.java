@@ -7,21 +7,22 @@ public class Camera extends RenderItem {
 	private int ScreenWidth;
 	private int ScreenHeight;
 	private int tilesize;
-	private int Scale;
+	private double Scale;
 	private Map map;
 	public Camera(int w, int h, int size, Map m) {
 		super("Camera",0,0,w+300,h+150);
 		ScreenWidth = w;
 		ScreenHeight = h;
 		tilesize = size;
-		Scale = 1;
+		Scale = .2;
 		map = m;
 	}	
 	public void drawBody(Graphics pen) {
+		System.out.println(getsizeScale());
 		map.drawColliding(pen, getPosX(), getPosY(), getObjW(),getObjH());
 	}	
 	public Tile[][] getView() {
-		int tmpscl = Scale * tilesize;
+		int tmpscl = (int)(Scale * tilesize);
 		int tmpW = ScreenWidth/tmpscl +2;
 		//System.out.println("TMP W: " + tmpW);
 		int tmpH = ScreenHeight/tmpscl +2;
@@ -36,8 +37,8 @@ public class Camera extends RenderItem {
 	public Tile getTile(int x, int y) {
 		int ttx = ((x)+getOffsetX()+150);
 		int tty = ((y)+getOffsetY()+125);
-		int tx = (ttx/128);
-		int ty = (tty/128);
+		int tx = (ttx/getsizeScale());
+		int ty = (tty/getsizeScale());
 		return getTileCoord(tx, ty);
 	}
 	public Tile getTileCoord(int x, int y) {
@@ -53,17 +54,20 @@ public class Camera extends RenderItem {
 		}
 		return null;
 	}
+	public int getsizeScale() {
+		return (int)(tilesize*Scale);
+	}
 	public int getOffsetX() {
-		int leftoverx = getPosX()%128;
+		int leftoverx = getPosX()%getsizeScale();
 		return leftoverx;
 	}
 	public int getOffsetY() {
-		int leftovery = getPosY()%128;
+		int leftovery = getPosY()%getsizeScale();
 		return leftovery;
 	}
 	public Tile getActualTile(int x, int y) {
-		int tx = (x+getOffsetX()+150)/128;
-		int ty = (y+getOffsetY()+125)/128;
+		int tx = (x+getOffsetX()+150)/getsizeScale();
+		int ty = (y+getOffsetY()+125)/getsizeScale();
 		Tile[][] view = getView();
 		if(tx>0 && tx<view.length && ty>0 && ty<view[0].length && view[tx][ty]!=null) {
 			return getTileCoord(tx, ty);

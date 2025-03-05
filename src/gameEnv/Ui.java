@@ -42,7 +42,7 @@ public class Ui extends Environment {
                 game = g;
                 x = 1100;
                 y = 600;
-                System.out.print("\n\nCow");
+                //System.out.print("\n\nCow");
                 setButtons();
 
             }
@@ -53,16 +53,16 @@ public class Ui extends Environment {
                     public void action() {
                         
                         Ability a = game.getSelected().getAbility(0);
-                        System.out.print("\n\nCow"+a);
-                        a.actions();                        
+                        //System.out.print("\n\nCow"+a);
+                        if(a!=null) a.actions();                       
                     }
                 };
                 abilities[1] = new Button("Name", x+150, y+150) {
                     @Override
                     public void action() {
                         Ability a = game.getSelected().getAbility(1);
-                        System.out.print("Nuull\n\n\n" + a);
-                        a.actions();                        
+                        
+                        if(a!=null) a.actions();                        
                     }
                 };
 
@@ -70,7 +70,7 @@ public class Ui extends Environment {
                     @Override
                     public void action() {
                         Ability a = game.getSelected().getAbility(2);
-                        a.actions();                        
+                        if(a!=null) a.actions();                       
                     }
                 };
 
@@ -78,7 +78,7 @@ public class Ui extends Environment {
                     @Override
                     public void action() {
                         Ability a = game.getSelected().getAbility(3);
-                        a.actions();                        
+                        if(a!=null) a.actions();                        
                     }
                 };
 
@@ -122,7 +122,7 @@ public class Ui extends Environment {
             public void collision(int x, int y) {
                 if(x > this.x && x < this.x+getWidth() && y > this.y && y < this.y+getHeight()) {
                     for(int n = 0; n < 4; n++) {
-                        System.out.println(abilities[n]!=null);
+                        //System.out.println(abilities[n]!=null);
                         if(abilities[n]!=null) abilities[n].collision(x, y);
                     }
                     
@@ -159,11 +159,8 @@ public class Ui extends Environment {
         }
 
         public void collision(int x, int y) {
-            System.out.println("X:  " + x + ";  Y:  " + y);
-            System.out.println("TX:  " + this.x + ";  TY:  " + this.y);
-            System.out.println("FX:  " + (this.x + width)+ ";  FY:  " +(this.y+height) );
             if((x > this.x && x < this.x+width) && (y > this.y && y < this.y+height)) {
-                System.out.println("in here");
+                //System.out.println("in here");
                 pressed();
                 
             }

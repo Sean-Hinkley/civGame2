@@ -11,6 +11,7 @@ import gameEnv.Leader.Builds.Town;
 import gameEnv.Leader.Units.Unit;
 import renderWindow.RenderItem;
 public class Map extends RenderItem{
+	double scale = .2;
 	private Tile[][] map;
 	private ImgHandler imgs;
 	public Map(int size) {
@@ -18,7 +19,7 @@ public class Map extends RenderItem{
 		imgs = new ImgHandler();
 		
 		
-		map = new Tile[size][size];
+		map = new Tile[200][75];
 		setTiles();
 	}
 	public void setTiles() {
@@ -29,6 +30,10 @@ public class Map extends RenderItem{
 				map[x][y] = new Tile(x,y,randTile,imgs);
 			}
 		}
+	}
+
+	public void setTile(int x, int y) {
+
 	}
 	public TileBiome rng(int[] weights) {
 		int sum = 0;
@@ -58,9 +63,12 @@ public class Map extends RenderItem{
 		int rand = (int)(Math.random()*sum);
 		return tiles[rand];
 	}
+	public int getsizeScale() {
+		return (int)(size()*scale);
+	}
 	public void drawBody(Graphics pen) {
 		pen.setColor(Color.red);
-		pen.fillRect(getPosX(), getPosY(), 128 *map.length, 128*map[0].length);
+		pen.fillRect(getPosX(), getPosY(),  getsizeScale()*map.length, getsizeScale()*map[0].length);
 		for(int x = 0; x < map.length; x++) {
 			for(int y = 0; y < map[x].length; y++) {
 				map[x][y].draw(pen);
@@ -101,16 +109,16 @@ public class Map extends RenderItem{
 		return null;
 	}
 	public void drawColliding(Graphics pen, int x, int y, int w, int h) {
-		int leftoverx = (x%128)+150;
-		int leftovery = (y%128)+125;
-		int tmpx = x/128;
-		int tmpy = y/128;
-		Tile[][] tmplist = new Tile[w/128][h/128];
+		int leftoverx = (x%getsizeScale())+150;
+		int leftovery = (y%getsizeScale())+125;
+		int tmpx = x/getsizeScale();
+		int tmpy = y/getsizeScale();
+		Tile[][] tmplist = new Tile[(int)(w/getsizeScale())][(int)(h/getsizeScale())];
 		getSection(tmpx, tmpy, tmplist);
 		for(int dx = 0; dx < tmplist.length; dx++) {
 			for(int dy = 0; dy < tmplist[0].length; dy++) {
 				if(tmplist[dx][dy]!=null) {
-					tmplist[dx][dy].drawBody(pen, (dx*128)-leftoverx, (dy*128)-leftovery);
+					tmplist[dx][dy].drawBody(pen, (dx*getsizeScale())-leftoverx, (dy*getsizeScale())-leftovery);
 				}
 				
 			}

@@ -4,6 +4,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.ListFormat.Style;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 public class ImgHandler {
@@ -40,6 +41,14 @@ public class ImgHandler {
 		imgList.add(f);
 		f.resize(128,128 );
 	}
+
+	public void resize(int w, int h) {
+		for(int x = 0; x < imgList.size(); x++) {
+			Img im = imgList.get(x);
+			System.out.println("W" + w + " H" + h);
+			im.resize(w,h);
+		}
+	}
 	public class Img {
 		private BufferedImage img;
 		public String title;
@@ -49,7 +58,7 @@ public class ImgHandler {
 			title = tit;
 			imgstr = im;
 			try {
-				System.out.println(im);
+				//System.out.println(im);
 				img = ImageIO.read(new File(im));
 				resize(200, 200);
 				
@@ -65,8 +74,7 @@ public class ImgHandler {
 			return imgstr;
 		}
 		public void resize(int h, int w) {
-			int wid = img.getWidth();
-		    int heigt = img.getHeight();
+			System.out.println("W" + w + " H" + h);
 		    BufferedImage dimg = new BufferedImage(w, h, img.getType());
 		    Graphics2D g = dimg.createGraphics();
 		    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,

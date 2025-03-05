@@ -14,7 +14,7 @@ public class Tile extends RenderItem{
 	private Town town;
 	private BufferedImage image;
 	private int size = 128;
-	private int scale = 1;
+	private double scale = .2;
 	private TileBiome biome;
 	private ImgHandler imagehandler;
 	public Tile(int x, int y, int type, ImgHandler imgh) {
@@ -23,8 +23,8 @@ public class Tile extends RenderItem{
 		town = null;
 		remUnit();
 		biome = findtype(type);
-		this.setObjW(size * scale);
-		this.setObjH(size * scale);	
+		this.setObjW((int)(size * scale));
+		this.setObjH((int)(size * scale));	
 		imagehandler = imgh;
 	}
 
@@ -35,8 +35,8 @@ public class Tile extends RenderItem{
 		super("Tile",x,y);
 		remUnit();
 		biome = type;
-		this.setObjW(size * scale);
-		this.setObjH(size * scale);		
+		this.setObjW((int)(size * scale));
+		this.setObjH((int)(size * scale));			
 		imagehandler = imgh;
 		image = setImg(type);
 	}
@@ -106,13 +106,17 @@ public class Tile extends RenderItem{
 		drawBody(pen,getPosX(),getPosY());
 	}
 	public void drawBody(Graphics pen, int x, int y) {
-		this.setObjW(size * scale);
-		this.setObjH(size * scale);
+		
+		this.setObjW((int)(size * scale));
+		this.setObjH((int)(size * scale));
+		imagehandler.resize(getObjW(), getObjH());
 		drawTile(pen, x, y);
 		pen.setColor(Color.black);
 		pen.drawRect(x, y, this.getObjW(), this.getObjH());
 		if(getUnit() != null) {
 			//System.out.println("X: " + getPosX() + "; Y: " + getPosY() + " OnTile: " + getUnit());
+			//System.out.println(getObjH());	
+			imagehandler.resize(getObjW(), getObjH());
 			onTile.draw(pen, x, y);
 		}
 
@@ -121,8 +125,8 @@ public class Tile extends RenderItem{
 		}
 	}
 	public void drawTile(Graphics pen, int x, int y) {
-		this.setObjW(size * scale);
-		this.setObjH(size * scale);
+		this.setObjW((int)(size * scale));
+		this.setObjH((int)(size * scale));	
 		pen.drawImage(image, x, y, null);
 		
 			

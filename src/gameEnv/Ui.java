@@ -42,7 +42,7 @@ public class Ui extends Environment {
                 game = g;
                 x = 1100;
                 y = 600;
-                //System.out.print("\n\nCow");
+                
                 setButtons();
 
             }
@@ -53,7 +53,7 @@ public class Ui extends Environment {
                     public void action() {
                         
                         Ability a = game.getSelected().getAbility(0);
-                        //System.out.print("\n\nCow"+a);
+                       
                         if(a!=null) a.actions();                       
                     }
                 };
@@ -83,7 +83,7 @@ public class Ui extends Environment {
                 };
 
                 
-                //System.out.println(abilities[0]);
+                
             }
             public void draw(Graphics pen) {
                 if(game.getSelected()!=null) {
@@ -122,7 +122,7 @@ public class Ui extends Environment {
             public void collision(int x, int y) {
                 if(x > this.x && x < this.x+getWidth() && y > this.y && y < this.y+getHeight()) {
                     for(int n = 0; n < 4; n++) {
-                        //System.out.println(abilities[n]!=null);
+                        
                         if(abilities[n]!=null) abilities[n].collision(x, y);
                     }
                     
@@ -145,7 +145,7 @@ public class Ui extends Environment {
         }
 
         public void draw(Graphics pen) {
-            //System.out.println("drawing");
+            
             pen.setColor(Color.pink);
             pen.fillRect(x, y, width, height);
         }
@@ -160,7 +160,7 @@ public class Ui extends Environment {
 
         public void collision(int x, int y) {
             if((x > this.x && x < this.x+width) && (y > this.y && y < this.y+height)) {
-                //System.out.println("in here");
+                
                 pressed();
                 
             }
@@ -188,7 +188,6 @@ public class Ui extends Environment {
 
             public void collision(int x, int y) {
                 if(x > this.x && x < this.x+getWidth() && y > this.y && y < this.y+getHeight()) {
-                    //System.out.println("Clicked");
                     game.nextTurn();
                 }
             }

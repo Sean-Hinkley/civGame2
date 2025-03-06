@@ -33,20 +33,20 @@ public class Camera extends RenderItem {
 		map.setScale(s);
 	}
 	public void drawBody(Graphics pen) {
-		//System.out.println(getsizeScale());
+		
 		map.drawColliding(pen, getPosX(), getPosY(), getObjW(),getObjH());
 	}	
 	public Tile[][] getView() {
 		int tmpscl = (int)(Scale * tilesize);
 		int tmpW = ScreenWidth/tmpscl +2;
-		//System.out.println("TMP W: " + tmpW);
+		
 		int tmpH = ScreenHeight/tmpscl +2;
-		//System.out.println("TMP H: " + tmpH);
+		
 		Tile[][] mp = new Tile[tmpW][tmpH];
 		int tmpX = this.getPosX()/tmpscl;
 		int tmpY = this.getPosY()/tmpscl;
 		map.getSection(tmpX-1, tmpY-1, mp);
-		//System.out.println(mp[0][0]);
+		
 		return mp;
 	}
 	public Tile getTile(int x, int y) {
@@ -59,11 +59,10 @@ public class Camera extends RenderItem {
 	public Tile getTileCoord(int x, int y) {
 		Tile[][] tiles = getView();
 		if((x+1 < tiles.length && x+1 > 0) && (y+1 < tiles[0].length && y+1 > 0)) {
-			//System.out.println("Tile: " + tiles[x+1][y+1]);
+			
 			if(tiles[x+1][y+1]!=null)
 			{
-				//System.out.println("TileSelected\n\n");
-				//System.out.println(tiles[x][y]);
+			
 				return tiles[x+1][y+1];
 			}
 		}

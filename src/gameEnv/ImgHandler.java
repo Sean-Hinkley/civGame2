@@ -46,7 +46,7 @@ public class ImgHandler {
 	public void resize(int w, int h) {
 		for(int x = 0; x < imgList.size(); x++) {
 			Img im = imgList.get(x);
-			//System.out.println("W" + w + " H" + h);
+			
 			im.resize(w,h);
 		}
 	}
@@ -59,7 +59,7 @@ public class ImgHandler {
 			title = tit;
 			imgstr = im;
 			try {
-				//System.out.println(im);
+				
 				img = ImageIO.read(new File(im));
 				resize(128, 128);
 				
@@ -75,7 +75,7 @@ public class ImgHandler {
 			return imgstr;
 		}
 		public void resize(int w, int h) {
-			//System.out.println("W" + w + " H" + h);
+			
 		    BufferedImage dimg = new BufferedImage(w, h, img.getType());
 		    Graphics2D g = dimg.createGraphics();
 		    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
@@ -83,7 +83,7 @@ public class ImgHandler {
 		    g.drawImage(img, 0, 0, w, h, null);
 		    g.dispose();
 		    img = dimg;
-			//System.out.println(img.getWidth());
+			
 		}
 		public BufferedImage getImg() {
 			return img;

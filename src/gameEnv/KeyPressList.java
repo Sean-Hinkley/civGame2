@@ -12,7 +12,7 @@ public class KeyPressList {
 	}
 	
 	public void addKey(int code, String phrs) {
-		//System.out.println("Worked");
+		
 		keys.add(new Key(code,phrs));
 	}
 	
@@ -31,7 +31,6 @@ public class KeyPressList {
 	}
 	
 	public void update(Environment env) {
-		//System.out.println("True" + env);
 		for(int k = 0; k < keys.size(); k++) {
 			String n = keys.get(k).getAccess();
 			if(n != null) {
@@ -60,7 +59,7 @@ public class KeyPressList {
 		
 		public void keyReleased(int code) {
 			if(code == keyCode) {
-				//System.out.println("True");
+				
 				state = false;
 			}
 		}

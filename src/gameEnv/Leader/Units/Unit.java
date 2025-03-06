@@ -20,7 +20,6 @@ public class Unit extends RenderItem{
         super("Unit", x, y);
         abilities = new Ability[4];
         setAbility();
-        //System.out.println("\n\n"+abilities[0]);
         unitName = name;
         myLeader = l;
         moved = 0;
@@ -46,7 +45,6 @@ public class Unit extends RenderItem{
         abilities[0] = new Ability(this,"name") {
             
             public void actions() {
-                //System.out.println("Clicked");
                 myLeader.addTown(new Town(myLeader, title, x, y), getPosX(), getPosY());
                 myLeader.remUnit(unit);
             }
@@ -78,9 +76,9 @@ public class Unit extends RenderItem{
     }
 
     public Ability getAbility(int ind) {
-       // System.out.println("HEllo");
+ 
         if(ind >= 0 && ind < abilities.length) {
-            //System.out.println(abilities[ind]);
+
             return abilities[ind];
         }
 
@@ -131,7 +129,7 @@ public class Unit extends RenderItem{
         }
 
         public void drawButton(Graphics pen, int x, int y) {
-            //System.out.println("Runnnn");
+ 
             pen.setColor(Color.pink);
             pen.fillOval(x, y, 25, 25);
         }

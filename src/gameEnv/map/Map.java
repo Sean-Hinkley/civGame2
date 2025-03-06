@@ -28,7 +28,6 @@ public class Map extends RenderItem{
 		for(int x = 0; x < map.length; x++) {
 			for(int y = 0; y < map[x].length; y++) {
 				map[x][y] = new Tile(x,y,TileBiome.water,imgs);
-				System.out.println(map[x][y]);
 			}
 		}
 
@@ -39,24 +38,23 @@ public class Map extends RenderItem{
 		int startx = (int)(map.length/2);
 		int starty = (int)(map[0].length/2);
 		int[] weights = {100,100,50,100};
-		setTile(startx, starty,0,0,weights);
+		setTile(startx, starty,startx,starty,weights);
 	}	
 
-	public void setTile(int x, int y, int xdistance, int ydistance, int[] weights) {
+	public void setTile(int x, int y, int startx, int starty, int[] weights) {
 		TileBiome randTile = rng(weights);
-		int sum = (xdistance+ydistance)*5;
-		weights[2]+=sum;
+		int sum = (Math.abs(startx-x))+(Math.abs(starty-y));
+		System.out.println(sum);
+		weights[2] = sum*15;
 
 		if(x > 0 && x < map.length && y > 0 && y < map[0].length) {
-			//System.out.println(map[x][y]);
 			if(map[x][y].getSet() == false) {
-				//System.out.println(randTile);
 				map[x][y].setSet(true);
 				map[x][y].setBiome(randTile);
-				setTile(x+1, y, xdistance+1,ydistance, weights);
-				setTile(x-1, y, xdistance+1,ydistance, weights);
-				setTile(x, y+1, xdistance,ydistance+1, weights);
-				setTile(x, y-1, xdistance,ydistance+1, weights);
+				setTile(x+1, y, startx,starty, weights);
+				setTile(x-1, y, startx,starty, weights);
+				setTile(x, y+1, startx,starty, weights);
+				setTile(x, y-1, startx,starty, weights);
 			}
 		}
 		
@@ -99,7 +97,6 @@ public class Map extends RenderItem{
 		return tiles[rand];
 	}
 	public int getsizeScale() {
-		//System.out.println(tilesize*scale);
 		return (int)(tilesize*scale);
 	}
 	public void drawBody(Graphics pen) {

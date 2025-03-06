@@ -47,7 +47,6 @@ public class Tile extends RenderItem{
 
 	public void setSet(boolean b) {
 		set = b;
-		System.out.println(set);
 	} 
 
 	public boolean getSet() {
@@ -106,7 +105,6 @@ public class Tile extends RenderItem{
 		town = null;
 	}
 	public Unit getUnit() {
-		//if(this.onTile!=null) System.out.println("X: " + getPosX() + "; Y: " + getPosY() + this.onTile);
 		return this.onTile;
 	}
 	public void addUnit(Unit u) {
@@ -115,7 +113,7 @@ public class Tile extends RenderItem{
 
 	public void remUnit() {
 		this.onTile = null;
-		//System.out.println(this.onTile);
+	
 	}
 	public TileBiome findtype(int t) {
 		TileBiome tmp = null;

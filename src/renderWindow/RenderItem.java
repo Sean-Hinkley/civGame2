@@ -69,7 +69,7 @@ public class RenderItem {
 	}
 	public void keyTyped(KeyEvent ke) {}
     public void keyPressed(KeyEvent ke) {
-    	//System.out.println(ke.getKeyCode());
+    	
     }
     public void keyReleased(KeyEvent ke) {}
     public void mouseClicked(MouseEvent ke) {}

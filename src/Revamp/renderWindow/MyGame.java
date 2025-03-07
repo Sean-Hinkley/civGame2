@@ -23,9 +23,9 @@ public class MyGame extends Game  {
     
     RenderObject obj;
 
-    public MyGame() {
+    public MyGame(RenderObject ro) {
     	obj = new RenderObject(100, 100, 120, 100, RenderObjectType.image, new Image(TITLE, TITLE),new RenderObjectModifiers[] {RenderObjectModifiers.clickAction});
-    	
+    	start(TITLE, SCREEN_WIDTH,SCREEN_HEIGHT);
     }
     public void update() {
         
@@ -63,7 +63,7 @@ public class MyGame extends Game  {
     
    }
     //Launches the Game
-    public static void main(String[] args) { new MyGame().start(TITLE, SCREEN_WIDTH,SCREEN_HEIGHT); }
+    public static void main(String[] args) { new MyGame(null).start(TITLE, SCREEN_WIDTH,SCREEN_HEIGHT); }
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         

@@ -3,7 +3,6 @@ package renderWindow;
 //import java.awt.Color;
 //import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.AdjustmentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 //import java.io.IOException;

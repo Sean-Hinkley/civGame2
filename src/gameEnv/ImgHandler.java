@@ -1,11 +1,11 @@
 package gameEnv;
 import java.awt.Graphics2D;
-import java.awt.Image;
+//import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.ListFormat.Style;
+//import java.text.ListFormat.Style;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 public class ImgHandler {

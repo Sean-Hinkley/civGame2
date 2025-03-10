@@ -2,7 +2,6 @@ package renderWindow;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
-import java.awt.event.AdjustmentListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;

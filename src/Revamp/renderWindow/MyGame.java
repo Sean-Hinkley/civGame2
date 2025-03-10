@@ -10,9 +10,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 
 import Revamp.renderWindow.renderItem.RenderObject;
-import Revamp.renderWindow.renderItem.RenderObjectModifiers;
-import Revamp.renderWindow.renderItem.RenderObjectType;
-import Revamp.renderWindow.renderItem.Images.Image;
+//import Revamp.renderWindow.renderItem.RenderObjectModifiers;
+//import Revamp.renderWindow.renderItem.RenderObjectType;
+//import Revamp.renderWindow.renderItem.Images.Image;
 
 
 
@@ -24,7 +24,7 @@ public class MyGame extends Game  {
     RenderObject obj;
 
     public MyGame(RenderObject ro) {
-    	obj = new RenderObject(100, 100, 120, 100, RenderObjectType.image, new Image(TITLE, TITLE),new RenderObjectModifiers[] {RenderObjectModifiers.clickAction});
+    	obj = ro;
     	start(TITLE, SCREEN_WIDTH,SCREEN_HEIGHT);
     }
     public void update() {

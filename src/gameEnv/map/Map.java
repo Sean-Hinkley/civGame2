@@ -1,10 +1,6 @@
 package gameEnv.map;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
 
 import gameEnv.ImgHandler;
 import gameEnv.Leader.Builds.Town;

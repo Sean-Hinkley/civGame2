@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class KeyPressList {
 	public ArrayList<Key> keys;
-	private Environment game;
+	//private Environment game;
 	public KeyPressList(Environment g) {
 		keys = new ArrayList<Key>();
-		game = g;
+		//game = g;
 	}
 	
 	public void addKey(int code, String phrs) {

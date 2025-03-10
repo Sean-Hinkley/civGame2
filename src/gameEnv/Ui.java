@@ -6,7 +6,6 @@ import java.awt.Graphics;
 
 import java.awt.event.MouseEvent;
 
-import gameEnv.GameEnvironment;
 import gameEnv.Leader.Units.Unit;
 import gameEnv.Leader.Units.Unit.Ability;
 

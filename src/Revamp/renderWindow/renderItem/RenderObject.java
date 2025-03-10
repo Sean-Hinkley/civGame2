@@ -15,7 +15,7 @@ public class RenderObject {
 
     private RenderObjectType type;
     private Image image;
-    private RenderObjectModifiers[] modifiers;
+    RenderObjectModifiers[] modifiers;
     public RenderObject(int x, int y, int w, int h, RenderObjectType type, RenderObjectModifiers[] modifs)  {
         setShape(x, y, w, h);
         this.type = type;
@@ -28,6 +28,8 @@ public class RenderObject {
         image = im;
     }
 
+
+    //drawMethods
     public void draw(Graphics pen) {
         if(getType()==RenderObjectType.rect) {
             drawRect(pen);
@@ -39,17 +41,14 @@ public class RenderObject {
             drawImage(pen);
         }
     }
-
     public void drawRect(Graphics pen) {
         pen.setColor(Color.GREEN);
         pen.fillRect(getObjX(), getObjY(), getObjW(), getObjH());
     }
-
     public void drawCircle(Graphics pen) {
         pen.setColor(Color.GREEN);
         pen.fillOval(getObjX(), getObjY(), getObjW(), getObjH());
     }
-
     public void drawImage(Graphics pen) {
         pen.drawImage(image.getImage(),getObjX(),getObjY(), getObjW(), getObjH(), null);
     }
